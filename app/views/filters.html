@@ -1,0 +1,81 @@
+<!--BEGIN FILTER PREVIEW SECTION-->
+
+<div class="col-sm-4">
+  <h1>Preview Section</h1>
+  <div class="row">
+
+   <p>select a corpus item to view your filter on. The output from your corpus sample will be changed in real time.  This represents the bag of words that you will end up sending to be topic modeled.</p>
+    <select ng-model="selectedCorpusItem"
+              ng-options="c.title for c in corpusItems">
+      </select>
+  </div>
+
+
+  <div class="row">
+    <!--text preview box-->
+
+    <div class="col-sm-11"><span ng-repeat="token in filteredTokens | orderBy: 'id'"><span ng-hide="data.lemma">{{token.original_text}}</span><span ng-show="data.lemma">{{token.lemma}}</span> </span></div>
+
+  </div>
+
+</div>
+
+
+<!--END FILTER PREVIEW SECTION-->
+
+
+<!--BEGIN FILTER CONSTRUCTION SECTION-->
+<div class="col-sm-4">
+<h1>Construction Section</h1>
+
+  <p>Please enter a new filter title, select your options below and then click add filter</p>
+  <p>Filter editing is not yet available, please create new ones to suit your needs.</p>
+  <div class="row">
+
+    <formly-form model="newData" fields="newFilterFormFields" >
+        <button type="submit" class="btn btn-primary"  ng-click="addFilter()">Add Filter</button>
+    </formly-form>
+
+  </div>
+
+  <div class="row">
+    <h2>Remove Named Entities?</h2>
+    <formly-form model="data" fields="nerFormFields">
+    </formly-form>
+
+
+  </div>
+   <div class="row">
+    <h2>Replace words with their lemmas?</h2>
+    <formly-form model="data" fields="lemmaFormFields" >
+    </formly-form>
+
+
+  </div>
+
+  <div class="row">
+    <h2>Remove these stopwords?</h2>
+    <p>Takes a space seperated list of stopwords.  This list is prepopulated with a standard list of english stopwords</p>
+    <formly-form model="data" fields="stopwordsFormFields">
+    </formly-form>
+  </div>
+
+
+
+  <div class="row">
+    <h2>Select POS tags to include.</h2>
+    <formly-form model="data" fields="posFormFields" >
+    </formly-form>
+  </div>
+
+</div>
+<!--END FILTER CONSTRUCTION SECTION-->
+
+
+<!--BEGIN FILTER LIST SECTION-->
+<div class="col-sm-2">
+  <h1>Filter listing section</h1>
+
+
+</div>
+<!--END FILTER LIST SECTION-->

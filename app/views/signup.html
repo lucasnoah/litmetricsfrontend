@@ -1,0 +1,15 @@
+
+<div ng-hide="signupSuccess">
+<formly-form model="signupData" fields="signupFields" form="signupForm">
+        <div  ng-repeat="e in formErrors">
+                  <p style="color:red;">{{ e }}</p>
+        </div>
+        <button type="submit" class="btn btn-primary" ng-disabled="signupForm.$invalid" ng-click="registerUser()">Submit</button>
+    </formly-form>
+</div>
+
+<div ng-show="signupSuccess">
+  <h1>Congratulations you are now signed up!</h1>
+  <p>Please proceed to <a href="/login">the login page</a> to use the site.</p>
+
+  </div>

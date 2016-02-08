@@ -1,0 +1,13 @@
+
+<h1>Upload a text file to be proccessed</h1>
+<p>All the terrible ways your text can be mangled if you don't format it correctly</p>
+<formly-form model="textuploadData" fields="textUploadFields" form="textuploadForm">
+       <input type="file" ngf-select ng-model="textuploadData.file" name="file"
+             accept="text/*" ngf-max-size="15MB" required
+             ngf-model-invalid="errorFiles">
+        <div  ng-repeat="e in formErrors">
+                  <p style="color:red;">{{ e }}</p>
+        </div>
+
+        <button type="submit" class="btn btn-primary" ng-disabled="textuploadForm.$invalid" ng-click="uploadFile(textuploadData.file)">Submit</button>
+    </formly-form>

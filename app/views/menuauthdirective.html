@@ -1,0 +1,13 @@
+<ul class="nav navbar-nav navbar-right">
+<li ng-hide="loggedIn">
+  <button class="btn btn-md btn-info" ng-click="signIn()">Login</button>
+</li>
+
+<li ng-hide="loggedIn">
+ <button class="btn btn-md btn-info" ng-click="signUp()">Register</button>
+</li>
+
+<li ng-show="loggedIn">
+ <button class="btn btn-md btn-info" ng-click="logout()">Logout</button>
+</li>
+</ul>
