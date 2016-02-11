@@ -21,6 +21,7 @@ angular
     'ngStorage',
     'naif.base64',
     'ngFileUpload',
+    'ui.bootstrap'
 
 
 

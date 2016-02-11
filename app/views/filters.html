@@ -28,15 +28,7 @@
 <div class="col-sm-4">
 <h1>Construction Section</h1>
 
-  <p>Please enter a new filter title, select your options below and then click add filter</p>
-  <p>Filter editing is not yet available, please create new ones to suit your needs.</p>
-  <div class="row">
 
-    <formly-form model="newData" fields="newFilterFormFields" >
-        <button type="submit" class="btn btn-primary"  ng-click="addFilter()">Add Filter</button>
-    </formly-form>
-
-  </div>
 
   <div class="row">
     <h2>Remove Named Entities?</h2>
@@ -74,7 +66,22 @@
 
 <!--BEGIN FILTER LIST SECTION-->
 <div class="col-sm-2">
-  <h1>Filter listing section</h1>
+  <h1>Create a new filter</h1>
+  <p>Please enter a new filter title, select your options below and then click add filter</p>
+  <p>Filter editing is not yet available, please create new ones to suit your needs.</p>
+  <div class="row">
+
+    <formly-form model="newData" fields="newFilterFormFields" >
+        <button type="submit" class="btn btn-primary"  ng-click="addFilter()">Add Filter</button>
+    </formly-form>
+
+  </div>
+
+  <div class="row">
+    <div ng-repeat="f in filters">
+      <div ng-click="editFilter(f)"><p>{{f.name}}</p></div>
+    </div>
+  </div>
 
 
 </div>

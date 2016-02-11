@@ -81,3 +81,9 @@ body {
     border-bottom: 0;
   }
 }
+
+/*Topic modeling page*/
+.collection-box{
+  min-height: 200px;
+  border: thin black solid;
+}

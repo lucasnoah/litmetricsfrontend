@@ -8,27 +8,29 @@
  * Controller of the litmetricsfrontendApp
  */
 angular.module('litmetricsfrontendApp')
-  .controller('FiltersCtrl', function ($scope, corpusService, tokenService) {
+  .controller('FiltersCtrl', function ($scope, corpusService, tokenService, filterService) {
 
 
-    //initilaize data models
+    /*INIT THE DATA MODELS*/
+
     $scope.data = {}
     $scope.newData = {}
     $scope.data['stopwords'] = ''
 
 
+    /*ADD FILTER FORM*/
 
     $scope.newFilterFormFields = [
       {
-            key: 'title',
-            type: 'input',
-            templateOptions: {
-                type: 'text',
-                label: 'Filter Title',
-                placeholder: 'Enter a filter name',
-                required: true
-            }
+        key: 'title',
+        type: 'input',
+        templateOptions: {
+          type: 'text',
+          label: 'Filter Title',
+          placeholder: 'Enter a filter name',
+          required: true
         }
+      }
 
     ]
 
@@ -62,14 +64,14 @@ angular.module('litmetricsfrontendApp')
 
     $scope.stopwordsFormFields = [
       {
-  "type": "textarea",
-  "key": "stopwords",
-  "templateOptions": {
+        "type": "textarea",
+        "key": "stopwords",
+        "templateOptions": {
 
-    "rows": 6,
-    "cols": 6
-  }
-}
+          "rows": 6,
+          "cols": 6
+        }
+      }
 
     ]
 
@@ -113,9 +115,9 @@ angular.module('litmetricsfrontendApp')
     $scope.data.lemma = true;
 
 
-     /*POS FORM*/
+    /*POS FORM*/
 
-      var buildPosTagFormFields = function (tagList) {
+    var buildPosTagFormFields = function (tagList) {
       //populate checkbox fields with pos tag names
       var posFields = [];
 
@@ -151,8 +153,6 @@ angular.module('litmetricsfrontendApp')
     $scope.data.pos = tokenService.getPosTokenList();
 
 
-
-
     /*LOAD PAGES AJAX DATA*/
 
     //grab user corpus items
@@ -174,33 +174,50 @@ angular.module('litmetricsfrontendApp')
 
     })
 
+    //grab user filters
+    filterService.grabUserFilters().success(function(d){
+      $scope.filters = d;
+    }).error(function(e){
+
+    })
+
+
+
+    /*CREATE AND UPDATE FILTERS*/
+    $scope.addFilter = function(){
+      filterService.createFilter($scope.data, $scope.newData.title).success(function(d){
+        alert('Your filter has been created')
+      }).error(function(e){
+        alert('There was an error creating your filter')
+      })
+
+
+
+    }
+
+
     /*WATCH FOR FORM VALUE CHANGES AND APPLY THEM TO THE FILTER*/
 
     //watch pos form data
-  $scope.$watch('data.pos', function(){
-            $scope.filteredTokens = tokenService.filterTokenByUserChoice($scope.exampleTokens, $scope.data)
-  })
+    $scope.$watch('data.pos', function () {
+      $scope.filteredTokens = tokenService.filterTokenByUserChoice($scope.exampleTokens, $scope.data)
+    })
 
     //watch lemma form data
-    $scope.$watch('data.lemmas', function(){
-            $scope.filteredTokens = tokenService.filterTokenByUserChoice($scope.exampleTokens, $scope.data)
+    $scope.$watch('data.lemmas', function () {
+      $scope.filteredTokens = tokenService.filterTokenByUserChoice($scope.exampleTokens, $scope.data)
 
-  })
+    })
 
     //watch stopwords form data
-    $scope.$watch('data.stopwords', function(){
-            $scope.filteredTokens = tokenService.filterTokenByUserChoice($scope.exampleTokens, $scope.data)
-  })
+    $scope.$watch('data.stopwords', function () {
+      $scope.filteredTokens = tokenService.filterTokenByUserChoice($scope.exampleTokens, $scope.data)
+    })
 
     //watch ner form data
-    $scope.$watch('data.ner', function(){
-            $scope.filteredTokens = tokenService.filterTokenByUserChoice($scope.exampleTokens, $scope.data)
-  })
-
-
-
-
-
+    $scope.$watch('data.ner', function () {
+      $scope.filteredTokens = tokenService.filterTokenByUserChoice($scope.exampleTokens, $scope.data)
+    })
 
 
   });
