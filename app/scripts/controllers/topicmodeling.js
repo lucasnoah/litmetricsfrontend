@@ -8,7 +8,7 @@
  * Controller of the litmetricsfrontendApp
  */
 angular.module('litmetricsfrontendApp')
-  .controller('TopicmodelingCtrl', function ($scope, filterService, corpusService, $uibModal) {
+  .controller('TopicmodelingCtrl', function ($scope, filterService, corpusService, $uibModal, topicModelingService) {
 
     /*INITIALIZE SCOPE VARIABLES*/
 
@@ -25,8 +25,10 @@ angular.module('litmetricsfrontendApp')
       $scope.selectedCorpusCollection = $scope.collections[0]
     })
 
-
-
+    //object to dump form data
+    $scope.topicModelingData = {};
+      //form object
+      //$scope.topicModelingForm = {};
     }
 
     $scope.init();
@@ -85,12 +87,97 @@ angular.module('litmetricsfrontendApp')
   };
 
 
+/*TOPIC MODELING OPTIONS*/
+
+     $scope.topicModelingFormFields = [
+      {
+        key: 'wordNetSense',
+        type: 'radio',
+        templateOptions: {
+
+          label:'Attach WordNet sense ID to token?',
+          options: [{
+            value: true,
+            name: 'YES',
+          },
+            {
+              value: false,
+              name: 'NO'
+            }
+
+          ]
+
+        }
+      },
+       {
+        key: 'lemmas',
+        type: 'radio',
+        templateOptions: {
+
+          label:'use lemmas in place of words?',
+          options: [{
+            value: true,
+            name: 'YES',
+          },
+            {
+              value: false,
+              name: 'NO'
+            }
+
+          ]
+
+        }
+      },
+       {
+        key: 'numTopics',
+        type: 'input',
+        templateOptions: {
+          type:'number',
+          label: 'Number of topics'
+
+        }
+      },
+       {
+        key: 'numPasses',
+        type: 'input',
+        templateOptions: {
+          type:'number',
+          label: 'Number of passes'
+
+        }
+      }
+
+
+    ]
+
+
+
+  //init lemma field value
+    $scope.topicModelingData.lemmas = true;
+    $scope.topicModelingData.wordNetSense = true;
 
 
 
 
+    /* BUNDLE AND SEND OBJECTS TO BE TOPIC MODELED */
 
+    $scope.modelTopics = function(){
+      var data = {
+        options: $scope.topicModelingData,
+        collections: $scope.collectionsToModel
+      }
 
+      if (!data.collections.length  < 1){
+        topicModelingService.modelTopics(data).success(function(d){
+
+      })
+
+      }
+
+      else{
+        alert('Please include at least on collection in your topic modeling data.');
+      }
+    }
 
 
 

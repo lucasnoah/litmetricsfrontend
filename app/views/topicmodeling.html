@@ -49,10 +49,16 @@
 
 
     </div>
-
-
+</div>
+</div>
 
 <div class="col-sm-4">
+  <h2>Modeling Options</h2>
+  <formly-form model="topicModelingData" fields="topicModelingFormFields" form="topicModelingForm">
+    <button class="btn btn-lg btn-info" ng-disabled="topicModelingForm.$invalid" ng-click="modelTopics()">Model Topics</button>
+  </formly-form>
+
+
 
 </div>
 

@@ -1,0 +1,48 @@
+<div class="col-sm-2">
+  <div class="row">
+  <p>select a corpus item to view your filter on. The output from your corpus sample will be changed in real time.  This represents the bag of words that you will end up sending to be topic modeled.</p>
+    <select ng-model="selectedCorpusItem"
+              ng-options="c.title for c in corpusItems">
+      </select>
+  </div>
+
+  <div class="row">
+
+
+
+  </div>
+
+</div>
+<div class="col-sm-5">
+
+      <h3>click on a pos button to highlight the words with that pos tag by the buttons color.</h3>
+
+
+
+  <div class="col-sm-6 color-button" ng-repeat="button in buttonList" ng-click="toggleButtonHighlight(button)" >
+      <div class="col-sm-1 color-block" ng-style="getButtonColorObject(button)">
+      </div>
+      <div class="col-sm-10">
+        {{button.tag}}--{{button.tagName}}
+      </div>
+
+    </div>
+
+</div>
+
+<div class="col-sm-5">
+   <div class="row">
+    <!--text preview box-->
+     <h3>Click on a word to edit it's token attributes</h3>
+
+    <div class="col-sm-8"><span ng-repeat="token in exampleTokens | orderBy: 'id'" ng-click="openTokenEditor(token)" ng-style="getBackgroundColorObject(token.pos)"><span ng-hide="data.lemma">{{token.original_text}}</span><span ng-show="data.lemma">{{token.lemma}}</span> </span></div>
+
+  </div>
+
+  <div class="row">
+
+    <button class="btn btn-lg btn-info " ng-click="toggleToNextSetOfTokens(previousTokenPage)">PREVIOUS PAGE</button>
+    <button class="btn btn-lg btn-info " ng-click="toggleToNextSetOfTokens(nextTokenPage)">NEXT PAGE</button>
+
+  </div>
+</div>

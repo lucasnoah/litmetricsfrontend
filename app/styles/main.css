@@ -87,3 +87,31 @@ body {
   min-height: 200px;
   border: thin black solid;
 }
+
+.topic-box{
+  border: thin black solid;
+}
+
+.topic-box{
+margin-bottom: 10px;
+   border: thin black solid;
+}
+
+.selected{
+  border:red thin solid;
+
+
+}
+
+/*EDITING PAGE STYLES*/
+.color-button{
+  border:thin black solid;
+  padding-left:0px;
+
+}
+
+.color-block{
+  height:25px;
+  margin-left: 0px;
+  padding-left: 0px;
+}

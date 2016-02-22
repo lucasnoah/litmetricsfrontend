@@ -68,6 +68,21 @@ angular
         controller: 'FiltersCtrl',
         controllerAs: 'filters'
       })
+      .when('/topics', {
+        templateUrl: 'views/topics.html',
+        controller: 'TopicsCtrl',
+        controllerAs: 'topics'
+      })
+      .when('/corpusediting', {
+        templateUrl: 'views/corpusediting.html',
+        controller: 'CorpuseditingCtrl',
+        controllerAs: 'corpusediting'
+      })
+      .when('/bibliography', {
+        templateUrl: 'views/bibliography.html',
+        controller: 'BibliographyCtrl',
+        controllerAs: 'bibliography'
+      })
       .otherwise({
         redirectTo: '/'
       });

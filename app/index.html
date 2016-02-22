@@ -24,7 +24,7 @@
     <!-- Add your site or application content here -->
     <div class="header">
       <div class="navbar navbar-default" role="navigation">
-        <div class="container">
+        <div class="container-fluid">
           <div class="navbar-header">
 
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
@@ -43,6 +43,10 @@
               <li class="active"><a href="#/">Home</a></li>
               <li><a ng-href="#/about">About</a></li>
               <li><a ng-href="#/corpusitemselection">Collections</a></li>
+              <li><a ng-href="#/filters">Filters</a></li>
+              <li><a ng-href="#/topicmodeling">Topic Modeling</a></li>
+              <li><a ng-href="#/topics">Modeling Results</a></li>
+              <li><a ng-href="#/corpusediting">Editor</a></li>
             </ul>
              <menuauth></menuauth>
           </div>
@@ -122,6 +126,10 @@
         <script src="scripts/services/tokenservice.js"></script>
         <script src="scripts/services/filterservice.js"></script>
         <script src="scripts/controllers/selectfiltermodal.js"></script>
+        <script src="scripts/controllers/topics.js"></script>
+        <script src="scripts/controllers/corpusediting.js"></script>
+        <script src="scripts/controllers/tokeneditor.js"></script>
+        <script src="scripts/controllers/bibliography.js"></script>
         <!-- endbuild -->
 </body>
 </html>

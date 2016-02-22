@@ -170,7 +170,8 @@ angular.module('litmetricsfrontendApp')
       $scope.nextTokenPage = d.next;
       $scope.previousTokenPage = d.previous;
       //run the original filter token filtering
-      $scope.filteredTokens = tokenService.filterTokenByUserChoice($scope.exampleTokens, $scope.data)
+      $scope.filteredTokens = tokenService.filterTokenByUserChoice($scope.exampleTokens, $scope.data).selected
+       $scope.removedTokens = tokenService.filterTokenByUserChoice($scope.exampleTokens, $scope.data).removed
 
     })
 
@@ -200,23 +201,27 @@ angular.module('litmetricsfrontendApp')
 
     //watch pos form data
     $scope.$watch('data.pos', function () {
-      $scope.filteredTokens = tokenService.filterTokenByUserChoice($scope.exampleTokens, $scope.data)
+      $scope.filteredTokens = tokenService.filterTokenByUserChoice($scope.exampleTokens, $scope.data).selected
+      $scope.removedTokens = tokenService.filterTokenByUserChoice($scope.exampleTokens, $scope.data).removed
+
     })
 
     //watch lemma form data
     $scope.$watch('data.lemmas', function () {
-      $scope.filteredTokens = tokenService.filterTokenByUserChoice($scope.exampleTokens, $scope.data)
-
+      $scope.filteredTokens = tokenService.filterTokenByUserChoice($scope.exampleTokens, $scope.data).selected
+      $scope.removedTokens = tokenService.filterTokenByUserChoice($scope.exampleTokens, $scope.data).removed
     })
 
     //watch stopwords form data
     $scope.$watch('data.stopwords', function () {
-      $scope.filteredTokens = tokenService.filterTokenByUserChoice($scope.exampleTokens, $scope.data)
+      $scope.filteredTokens = tokenService.filterTokenByUserChoice($scope.exampleTokens, $scope.data).selected
+      $scope.removedTokens = tokenService.filterTokenByUserChoice($scope.exampleTokens, $scope.data).removed
     })
 
     //watch ner form data
     $scope.$watch('data.ner', function () {
-      $scope.filteredTokens = tokenService.filterTokenByUserChoice($scope.exampleTokens, $scope.data)
+      $scope.filteredTokens = tokenService.filterTokenByUserChoice($scope.exampleTokens, $scope.data).selected
+      $scope.removedTokens = tokenService.filterTokenByUserChoice($scope.exampleTokens, $scope.data).removed
     })
 
 
