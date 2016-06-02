@@ -8,6 +8,9 @@
  *
  * Main module of the application.
  */
+
+//var urlBase = 'http://api.litmetrics.com/'
+var urlBase = 'http://127.0.0.1:8000/'
 angular
   .module('litmetricsfrontendApp', [
     'ngAnimate',
@@ -22,11 +25,15 @@ angular
     'naif.base64',
     'ngFileUpload',
     'ui.bootstrap',
-    'angularSpinner'
+    'angularSpinner',
+    'satellizer'
   ])
 
-  .constant('API_URL', 'http://api.litmetrics.com/')
+
+  .constant('API_URL', urlBase)
   //.constant('API_URL', 'http://127.0.0.1:8000/')
+
+
 
 
   .config(function ($routeProvider) {
@@ -54,12 +61,14 @@ angular
       .when('/corpusitemselection', {
         templateUrl: 'views/corpusitemselction.html',
         controller: 'CorpusitemselctionCtrl',
-        controllerAs: 'corpusitemselction'
+        controllerAs: 'corpusitemselction',
+        loginRequired: true
       })
       .when('/topicmodeling', {
         templateUrl: 'views/topicmodeling.html',
         controller: 'TopicmodelingCtrl',
-        controllerAs: 'topicmodeling'
+        controllerAs: 'topicmodeling',
+        loginRequired: true
       })
       .when('/filters', {
         templateUrl: 'views/filters.html',
@@ -90,11 +99,24 @@ angular
     usSpinnerConfigProvider.setDefaults({color: 'blue'});
 }])
 
-.config(function ($httpProvider, $sceDelegateProvider) {
-  $httpProvider.interceptors.push('authInterceptor');
-   $httpProvider.defaults.useXDomain = true;
-    $httpProvider.defaults.withCredentials = false;
-    delete $httpProvider.defaults.headers.common["X-Requested-With"];
+.config(function ($httpProvider,  $authProvider, $sceDelegateProvider) {
+  //$httpProvider.interceptors.push('authInterceptor');
+  $httpProvider.defaults.useXDomain = false;
+
+  $httpProvider.defaults.withCredentials = false;
+    $authProvider.httpInterceptor = function() { return true; },
+  $authProvider.withCredentials = false;
+  $authProvider.tokenRoot = null;
+  $authProvider.baseUrl = urlBase;
+  $authProvider.loginUrl = 'auth/login/';
+  $authProvider.signupUrl = '/auth/register/';
+  $authProvider.unlinkUrl = '/auth/unlink/';
+  $authProvider.tokenName = 'auth_token';
+  $authProvider.tokenPrefix = 'satellizer';
+  $authProvider.authHeader = 'Authorization';
+  $authProvider.authToken = 'Token';
+  $authProvider.storageType = 'localStorage';
+    //delete $httpProvider.defaults.headers.common["X-Requested-With"];
     $httpProvider.defaults.headers.common["Accept"] = "application/json";
     $httpProvider.defaults.headers.common["Content-Type"] = "application/json";
 

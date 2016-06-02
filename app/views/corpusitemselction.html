@@ -1,42 +1,57 @@
-<div>
+<div class="container">
+  <!--BEGIN TITLE AND EXPLAINER-->
+  <div class="row">
+    <div class="col-sm-12">
+      <h1>Collections</h1>
+      <p>Collections are sets of corpus items that are filtered in the same way before being sent to topic modeling.  For instance if you were processing a bunch of chapters from a novel and you wanted to remove the names of characters from them, you would group all of the uploaded chapter corpus items together and then apply a filter later.  Filter are created under the filter tab and are applied to the collections before modeling in the topic modeling tab. Select or create a collection and then add corpus items to it.  It's can be removed from collection by clicking on the x adjacent to their names.</p>
+    </div>
 
-  <!--BEGIN SELCTION AND ADDITION-->
-  <div class="col-sm-4">
-    <h3>Your Collections</h3>
-    <div>
-      <select ng-model="selectedCorpusCollection"
-              ng-options="collection.title for collection in corpusCollections">
+  </div>
+  <!--END TITLE AND EXPLAINER-->
 
+  <div class="row">
+    <!--BEGIN SELCTION AND ADDITION-->
+    <div class="col-sm-4">
+      <div>
+
+        <formly-form model="corpusAdditionData" fields="corpusCollectionFields" form="corpusCollectionAdditionForm">
+          <button type="submit" class="btn btn-primary" ng-disabled="corpusCollectionAdditionForm.$invalid"
+                  ng-click="createCorpusCollection()">New Collection
+          </button>
+        </formly-form>
+      </div>
+
+      <h3>Corpus Items</h3>
+      <select name="corpusItemSelect" id="multipleSelect" ng-model="corpusItemSelections" class="form-control" multiple>
+        <option value="{{cp.id}}" ng-repeat="cp in corpusItems | filter: {is_processing:false}">{{cp.title}}</option>
 
       </select>
-      <formly-form model="corpusAdditionData" fields="corpusCollectionFields" form="corpusCollectionAdditionForm">
-        <button type="submit" class="btn btn-primary" ng-disabled="corpusCollectionAdditionForm.$invalid" ng-click="createCorpusCollection()">Add</button>
-    </formly-form>
-    </div>
-  </div>
-  <!--END SELECTION AND ADDITION-->
+      <div style="margin-top:10px;">
+        <button class="btn btn-md btn-info" ng-click="addItemsToCollection()">Add items to collection</button>
+      </div>
 
-  <div class="col-sm-4">
-    <h3>current collection</h3>
-    <p>{{selectedCorpusCollection.title}}</p>
-
-    <h3>Corpus Items</h3>
-    <div ng-repeat="ci in selectedCorpusCollection.items">
-          <p>{{ci.title}} <span class="glyphicon glyphicon-remove-circle" ng-click="removeItemFromCollection(ci, selectedCorpusCollection)"></span></p>
 
     </div>
+    <!--END SELECTION AND ADDITION-->
+
+    <div class="col-sm-8">
+      <div class="collection-select-box">
+        <label for="collectionSelector">Current Collection</label>
+        <select ng-model="selectedCorpusCollection" class="form-control" id="collectionSelector"
+                ng-options="collection.title for collection in corpusCollections">
+        </select>
+      </div>
+      <div class="corpus-list-box">
+        <h3>collection members</h3>
+        <div ng-repeat="ci in selectedCorpusCollection.items">
+          <p>{{ci.title}} <span class="glyphicon glyphicon-remove-circle"
+                                ng-click="removeItemFromCollection(ci, selectedCorpusCollection)"></span></p>
+        </div>
+      </div>
+
+    </div>
+
+
 
   </div>
-
-  <div class="col-sm-3">
-    <h3>Corpus Items</h3>
-    <select name="corpusItemSelect" id="multipleSelect" ng-model="corpusItemSelections" multiple>
-      <option value="{{cp.id}}" ng-repeat="cp in corpusItems | filter: {is_processing:false}">{{cp.title}}</option>
-
-    </select>
-    <button class="btn btn-md btn-info" ng-click="addItemsToCollection()">Add items</button>
-
-  </div>
-
-
 </div>

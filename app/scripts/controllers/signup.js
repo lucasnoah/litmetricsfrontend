@@ -8,7 +8,7 @@
  * Controller of the litmetricsfrontendApp
  */
 angular.module('litmetricsfrontendApp')
-  .controller('SignupCtrl', function ($scope, authService) {
+  .controller('SignupCtrl', function ($scope, $auth, $location) {
 
     $scope.signupData = {};
     $scope.signupSuccess = false;
@@ -53,20 +53,31 @@ angular.module('litmetricsfrontendApp')
     var parseErrors = function(errors) {
       var errorList = []
       angular.forEach(errors, function(value,key){
-        errorList.push(key + ' : ' + value)
+        console.log(value);
+        if (value['username']){
+          console.log('its the username')
+          errorList.push('username' + ' : ' + value['username'])
+        }
+
       })
       return errorList
     }
 
     $scope.registerUser = function(){
 
-      authService.signUp($scope.signupData).success(function(d){
-        alert('Your are signed up');
-        $scope.signupSuccess = true
-      }).error(function(e){
-        $scope.formErrors = parseErrors(e)
+      $auth.signup($scope.signupData)
+  .then(function(response) {
+    // Redirect user here to login page or perhaps some other intermediate page
+    // that requires email address verification before any other part of the site
+    // can be accessed.
+    alert('Your are signed up');
+        $location.path('/login')
+  })
+  .catch(function(response) {
+    // Handle errors here.
+     $scope.formErrors = parseErrors(response)
+  });
 
-      })
 
     }
 
