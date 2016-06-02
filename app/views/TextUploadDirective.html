@@ -1,6 +1,7 @@
 
-<h1>Upload a text file to be proccessed</h1>
-<p>All the terrible ways your text can be mangled if you don't format it correctly</p>
+<h1>Add a Text File</h1>
+<p>Upload a text file here for processing.  Your file will be tokenized and made available to you for topic modeling after it is done processing.  This can take anywhere form five minutes to a day depending on how busy the site is.</p>
+  <span us-spinner spinner-key="spinner-1"></span>
 <formly-form model="textuploadData" fields="textUploadFields" form="textuploadForm">
        <input type="file" ngf-select ng-model="textuploadData.file" name="file"
              accept="text/*" ngf-max-size="15MB" required
@@ -8,6 +9,5 @@
         <div  ng-repeat="e in formErrors">
                   <p style="color:red;">{{ e }}</p>
         </div>
-
-        <button type="submit" class="btn btn-primary" ng-disabled="textuploadForm.$invalid" ng-click="uploadFile(textuploadData.file)">Submit</button>
-    </formly-form>
+        <button type="submit" class="btn btn-primary form-control" ng-disabled="textuploadForm.$invalid" ng-click="uploadFile(textuploadData.file)">Submit</button>
+</formly-form>

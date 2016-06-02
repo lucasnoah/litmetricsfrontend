@@ -31,7 +31,7 @@
   <div class="col-sm-3">
     <h3>Corpus Items</h3>
     <select name="corpusItemSelect" id="multipleSelect" ng-model="corpusItemSelections" multiple>
-      <option value="{{cp.id}}" ng-repeat="cp in corpusItems">{{cp.title}}</option>
+      <option value="{{cp.id}}" ng-repeat="cp in corpusItems | filter: {is_processing:false}">{{cp.title}}</option>
 
     </select>
     <button class="btn btn-md btn-info" ng-click="addItemsToCollection()">Add items</button>

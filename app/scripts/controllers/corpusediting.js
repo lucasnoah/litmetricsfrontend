@@ -23,18 +23,22 @@ angular.module('litmetricsfrontendApp')
       $scope.corpusItems = d;
       //set the first option in the ng-options list
       $scope.selectedCorpusItem = $scope.corpusItems[0];
+      getTokens();
     })
 
     //grab the sample tokens
-    tokenService.grabTokensForCorpus(1, 400, 0).success(function (d) {
-      $scope.exampleTokens = d.results;
-      //set pagination links
-      $scope.nextTokenPage = d.next;
-      $scope.previousTokenPage = d.previous;
-      console.log('token results', d)
-      //run the original filter token filtering
+    function getTokens() {
+      tokenService.grabTokensForCorpus($scope.selectedCorpusItem.id, 400, 0).success(function (d) {
+        $scope.exampleTokens = d.results;
+        //set pagination links
+        $scope.nextTokenPage = d.next;
+        $scope.previousTokenPage = d.previous;
+        console.log('token results', d)
+        //run the original filter token filtering
 
-    })
+      })
+    }
+    $scope.getTokens = getTokens;
 
 
     /*HANDLE HIGHLIGHTING OF POS TAGS*/

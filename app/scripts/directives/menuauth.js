@@ -8,7 +8,9 @@
  */
 angular.module('litmetricsfrontendApp')
   .controller('MenuAuthDirectiveCtrl', function($sessionStorage, $location, $scope){
-    $scope.storage = $sessionStorage
+    $scope.storage = $sessionStorage;
+    $scope.loggedIn = false;
+
     if ($scope.storage.token == null || undefined){
       $scope.loggedIn = false;
     }
@@ -31,8 +33,20 @@ angular.module('litmetricsfrontendApp')
       console.log('logged out');
     }
 
+    $scope.$watch('storage.token', function(val){
+      if ($scope.storage.token == null || undefined){
+      $scope.loggedIn = false;
+    }
+    else{
+      $scope.loggedIn = true;
+    }
+
+    });
+
 
   })
+
+
 
   .directive('menuauth', function () {
     return {

@@ -1,8 +1,15 @@
-<div>
-  <h3>Corpus List</h3>
-  <p>The <span class="glyphicon glyphicon-ban-circle"></span> icon means the text is still being processed</p>
-  <div ng-repeat="i in items">
-    <p>{{ i.title }}<span class="glyphicon glyphicon-ban-circle" ng-show="i.processing"></span> </p>
+<div class="corpus-list-box">
+  <div ng-if="showProcessing">
+    <div ng-repeat="i in processing">
+    <p>{{ i.title }} <span class="glyphicon glyphicon-hourglass" ng-show="i.is_processing"></span> </p>
   </div>
+  </div>
+
+  <div ng-if="!showProcessing">
+    <div ng-repeat="i in doneProcessing">
+    <p>{{ i.title }} <span class="glyphicon glyphicon-hourglass" ng-show="i.is_processing"></span> </p>
+  </div>
+  </div>
+
 </div>
 

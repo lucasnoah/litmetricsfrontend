@@ -8,7 +8,7 @@
  * Controller of the litmetricsfrontendApp
  */
 angular.module('litmetricsfrontendApp')
-  .controller('TopicmodelingCtrl', function ($scope, filterService, corpusService, $uibModal, topicModelingService) {
+  .controller('TopicmodelingCtrl', function ($scope, filterService, corpusService, $uibModal, topicModelingService, usSpinnerService) {
 
     /*INITIALIZE SCOPE VARIABLES*/
 
@@ -162,6 +162,7 @@ angular.module('litmetricsfrontendApp')
     /* BUNDLE AND SEND OBJECTS TO BE TOPIC MODELED */
 
     $scope.modelTopics = function(){
+    usSpinnerService.spin('spinner-1');
       var data = {
         options: $scope.topicModelingData,
         collections: $scope.collectionsToModel
@@ -169,12 +170,15 @@ angular.module('litmetricsfrontendApp')
 
       if (!data.collections.length  < 1){
         topicModelingService.modelTopics(data).success(function(d){
+          usSpinnerService.stop('spinner-1');
+          alert('Your topic-modeling is now processing.  You will be sent an email upon completion and will be able to view your results in the modeling results tab.')
 
       })
 
       }
 
       else{
+        usSpinnerService.stop('spinner-1');
         alert('Please include at least on collection in your topic modeling data.');
       }
     }

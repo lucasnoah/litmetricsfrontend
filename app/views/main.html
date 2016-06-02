@@ -1,2 +1,16 @@
-<textupload></textupload>
-<corpuslist items="items"></corpuslist>
+<div class="container">
+  <!--BEGIN TEXT UPLOAD CONTAINER-->
+<div class="col-sm-6">
+  <textupload></textupload>
+</div>
+<!--END TEXT UPLOAD CONTAINER-->
+
+<!--BEGIN CORPUS LIST CONTAINER-->
+<div class="col-sm-6">
+  <h3>Processed</h3>
+  <corpuslist items="proccessedItems" show-processing="false"></corpuslist>
+  <h3>Still Processing</h3>
+  <corpuslist items="proccessedItems" show-processing="true"></corpuslist>
+</div>
+<!--END CORPUS LIST CONTAINER-->
+</div>

@@ -6,7 +6,7 @@
 
    <p>select a corpus item to view your filter on. The output from your corpus sample will be changed in real time.  This represents the bag of words that you will end up sending to be topic modeled.</p>
     <select ng-model="selectedCorpusItem"
-              ng-options="c.title for c in corpusItems">
+              ng-options="c.title for c in corpusItems | filter:{is_processing:false}">
       </select>
   </div>
 

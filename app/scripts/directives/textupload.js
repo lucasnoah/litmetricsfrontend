@@ -8,7 +8,7 @@
  */
 angular.module('litmetricsfrontendApp')
 
-  .controller('TextUploadCtrl', function($scope, API_URL, Upload, $timeout){
+  .controller('TextUploadCtrl', function($scope, API_URL, Upload, $timeout, $route,usSpinnerService){
 
      $scope.textuploadData = {}
 
@@ -28,6 +28,7 @@ angular.module('litmetricsfrontendApp')
     ]
 
      $scope.uploadFile = function(file) {
+       usSpinnerService.spin('spinner-1');
     file.upload = Upload.upload({
       url: API_URL + 'texts/',
       data: {file: $scope.textuploadData.file, title: $scope.textuploadData.title},
@@ -36,13 +37,19 @@ angular.module('litmetricsfrontendApp')
     file.upload.then(function (response) {
       $timeout(function () {
         file.result = response.data;
+        usSpinnerService.stop('spinner-1');
+        alert('It worked! When your text is done processing and available to work on you will recieve an email and It will show up on the site. feel free to upload another.');
+        $route.reload();
       });
     }, function (response) {
       if (response.status > 0)
+        usSpinnerService.stop('spinner-1');
         $scope.errorMsg = response.status + ': ' + response.data;
+      console.log($scope.errorMsg);
     }, function (evt) {
       // Math.min is to fix IE which reports 200% sometimes
       file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+      console.log(file.progress);
     });
     }
   })

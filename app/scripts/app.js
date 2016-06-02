@@ -21,14 +21,12 @@ angular
     'ngStorage',
     'naif.base64',
     'ngFileUpload',
-    'ui.bootstrap'
-
-
-
-
+    'ui.bootstrap',
+    'angularSpinner'
   ])
 
-  .constant('API_URL', 'http://127.0.0.1:8000/')
+  .constant('API_URL', 'http://api.litmetrics.com/')
+  //.constant('API_URL', 'http://127.0.0.1:8000/')
 
 
   .config(function ($routeProvider) {
@@ -88,6 +86,10 @@ angular
       });
   })
 
+  .config(['usSpinnerConfigProvider', function (usSpinnerConfigProvider) {
+    usSpinnerConfigProvider.setDefaults({color: 'blue'});
+}])
+
 .config(function ($httpProvider, $sceDelegateProvider) {
   $httpProvider.interceptors.push('authInterceptor');
    $httpProvider.defaults.useXDomain = true;
@@ -100,10 +102,11 @@ angular
     // Allow same origin resource loads.
     // Allow loading from outer templates domain.
 	'self',
-    'http://morning-reef-4788.herokuapp.com/**',
-	'http://nxl.com/**',
-	'http://localhost:9000/**',
-	'http://morning-reef-4788.herokuapp.com/auth/me/',
+    'http://litmetrics.com/*',
+    'http://www.litmetrics.com/*',
+    'http://api.litmetrics.com/*',
+
+	'http://localhost:9000/*',
 	'http://127.0.0.1:8000'
 
   ]);

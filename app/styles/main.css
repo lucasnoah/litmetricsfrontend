@@ -115,3 +115,10 @@ margin-bottom: 10px;
   margin-left: 0px;
   padding-left: 0px;
 }
+
+.corpus-list-box{
+  border: black thin solid;
+  background-color:lightblue;
+  border-radius: 10px;
+  padding: 10px 10px 10px 10px;
+}

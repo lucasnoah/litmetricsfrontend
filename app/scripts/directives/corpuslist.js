@@ -14,13 +14,27 @@ angular.module('litmetricsfrontendApp')
 
 
   .controller('corpusListDirectiveCtrl', function($scope, corpusService){
-    console.log('items', $scope.items)
+    console.log($scope.showProcessing);
 
     corpusService.getUserCorpusList().success(function(d){
-      $scope.items = d;
+      var input = d;
+      var processing = [];
+      var doneProcessing = [];
+      console.log('got the d', d);
+      for(var i=0; i < input.length;i++){
+
+        console.log('input i', input[i].is_processing)
+        if (input[i].is_processing){
+          processing.push(input[i]);
+        }
+        else{
+          doneProcessing.push(input[i]);
+        }
+      }
+      $scope.processing = processing;
+      $scope.doneProcessing = doneProcessing;
+      console.log('out', processing, doneProcessing)
     })
-
-
 
 
   })
@@ -31,7 +45,8 @@ angular.module('litmetricsfrontendApp')
       restrict: 'E',
       controller: 'corpusListDirectiveCtrl',
       scope: {
-            items: '='
+            items: '=',
+            showProcessing: '='
         }
     };
   });
