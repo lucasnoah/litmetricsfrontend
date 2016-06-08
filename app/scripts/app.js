@@ -10,7 +10,9 @@
  */
 
 //var urlBase = 'http://api.litmetrics.com/'
+
 var urlBase = 'http://127.0.0.1:8000/'
+
 angular
   .module('litmetricsfrontendApp', [
     'ngAnimate',
@@ -31,11 +33,11 @@ angular
 
 
   .constant('API_URL', urlBase)
-  //.constant('API_URL', 'http://127.0.0.1:8000/')
-
-
-
-
+  
+  .config(['$compileProvider', function ($compileProvider) {
+    $compileProvider.aHrefSanitizationWhitelist(/^\s*(|blob|):/);
+}])
+  
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {

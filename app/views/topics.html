@@ -15,6 +15,7 @@
 <!--RESULTS CONTENT-->
 <div class="col-sm-9">
   <h2>Topic Modeling Results</h2>
+  <a ng-href="{{ fileUrl }}" download="{{selectedTopicGroup.id.toString()}}.csv">Download Topics as CSV</a>
   <div class="row topic-box" ng-repeat="topic in selectedTopicGroup.topics">
     <span ng-repeat="wordPair in topic.tuples">{{wordPair.word}}--({{wordPair.weight | limitTo: 6}})  </span>
   </div>

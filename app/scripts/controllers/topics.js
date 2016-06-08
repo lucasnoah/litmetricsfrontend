@@ -8,14 +8,18 @@
  * Controller of the litmetricsfrontendApp
  */
 angular.module('litmetricsfrontendApp')
-  .controller('TopicsCtrl', function ($scope, topicModelingService) {
+  .controller('TopicsCtrl', function ($scope, topicModelingService, $window) {
 
 
     $scope.init = function(){
       topicModelingService.getYourTopics().success(function(d){
         $scope.topics = d;
         $scope.selectedTopicGroup = $scope.topics[0];
-        console.log($scope.topics, $scope.selectedTopicGroup)
+        topicModelingService.downloadCsv($scope.selectedTopicGroup.id).success(function(d){
+        var blob = new Blob([d], { type: 'text/csv' });
+        var url = $window.URL || $window.webkitURL;
+        $scope.fileUrl = url.createObjectURL(blob);
+      })
       })
 
     }
@@ -26,8 +30,18 @@ angular.module('litmetricsfrontendApp')
 
     $scope.viewTopic = function(topicGroup){
       $scope.selectedTopicGroup=topicGroup;
+      topicModelingService.downloadCsv($scope.selectedTopicGroup.id).success(function(){
+      var blob = new Blob([data], { type: 'text/csv' })
+      var url = $window.URL || $window.webkitURL;
+      $scope.fileUrl = url.createObjectURL(blob);
+    })
 
     }
+
+
+
+
+
 
 
   });

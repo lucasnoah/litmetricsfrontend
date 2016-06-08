@@ -21,5 +21,12 @@ angular.module('litmetricsfrontendApp')
       return $http.get(API_URL +'models/')
     }
 
+    this.downloadCsv = function(topicId){
+      var data = {
+        topic_id: topicId
+      }
+      return $http.post(API_URL + 'models/download_topics_csv/', data)
+    }
+
 
   });

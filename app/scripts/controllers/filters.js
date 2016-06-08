@@ -140,6 +140,7 @@ angular.module('litmetricsfrontendApp')
         type: 'multiCheckbox',
         templateOptions: {
           label: 'POS TAGS',
+          inline: true,
 
 
           options: posOptions,
