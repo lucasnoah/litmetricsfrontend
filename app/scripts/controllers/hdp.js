@@ -2,40 +2,39 @@
 
 /**
  * @ngdoc function
- * @name litmetricsfrontendApp.controller:TopicmodelingCtrl
+ * @name litmetricsfrontendApp.controller:HdpCtrl
  * @description
- * # TopicmodelingCtrl
+ * # HdpCtrl - handles submission of hdp topic models.
  * Controller of the litmetricsfrontendApp
  */
 angular.module('litmetricsfrontendApp')
-  .controller('TopicmodelingCtrl', function ($scope, filterService, corpusService, $uibModal, topicModelingService, usSpinnerService) {
-
-    /*INITIALIZE SCOPE VARIABLES*/
+  .controller('HdpCtrl', function ($scope, filterService, corpusService, $uibModal, topicModelingService, usSpinnerService) {
+     /*INITIALIZE SCOPE VARIABLES*/
 
     $scope.init = function () {
       //filters
       filterService.grabUserFilters().success(function (d) {
         $scope.filters = d;
-      });
+      })
 
       //corpus collections
       corpusService.getUserCorpusCollections().success(function (d) {
         $scope.collections = d;
         //init select object
         $scope.selectedCorpusCollection = $scope.collections[0]
-      });
+      })
 
       //object to dump form data
       $scope.topicModelingData = {};
       //form object
       //$scope.topicModelingForm = {};
-    };
+    }
 
     $scope.init();
 
     /*INITIALIZE FORM FIELDS*/
 
-    $scope.collectionsToModel = [];
+    $scope.collectionsToModel = []
 
     /*ADD AND REMOVE COLLECTIONS*/
 
@@ -49,12 +48,12 @@ angular.module('litmetricsfrontendApp')
 
       }
 
-    };
+    }
 
 
     $scope.removeCorpusCollection = function (collection) {
       $scope.collectionsToModel.splice(collection, 1)
-    };
+    }
 
     /*ASSIGN FILTER OPTIONS FOR EACH COLLECTION*/
 
@@ -88,6 +87,37 @@ angular.module('litmetricsfrontendApp')
 
 
     /*TOPIC MODELING OPTIONS*/
+
+    /*
+
+    (Hierarchical Dirlecht Process): requires training corpus, infers number of topics:
+
+Chunksize defaults to 256 {batch size in Wang article: that’s the number of DOCUMENTS used in each
+
+iteration, NOT a chunking at the document level}
+
+kappa defaults to 1.0 = learning rate {exponential decay rate} {default 0.51 based on Online LDA paper}
+
+{little kappa is “How quickly old information is forgotten”
+
+tau defaults to 64 = slow down parameter {downweights earlier iterations}
+
+Kappa {might be Cap “K”} defaults to 15 = second level truncation level [Number of topics]
+
+T defaults to 150 = top level truncation level [truncation is MAX number of topics for a document]
+
+alpha defaults to 1 = second level concentration
+
+gamma defaults to 1 = first level concentration
+
+eta defaults to 0.01 = the topic dirichlet
+
+scale defaults to 1
+
+Var_converge defaults to 0.0001
+
+Switch for optimal ordering of topics
+     */
 
     $scope.topicModelingFormFields = [
       {
@@ -128,74 +158,87 @@ angular.module('litmetricsfrontendApp')
 
         }
       },
+
       {
-        key: 'numTopics',
+        key: 'alpha',
         type: 'input',
         templateOptions: {
           type: 'number',
-          label: 'Number of topics'
+          label: 'Alpha'
 
         }
       },
       {
-        key: 'numPasses',
+        key: 'gamma',
         type: 'input',
         templateOptions: {
           type: 'number',
-          label: 'Number of passes'
-
-        }
-      },
-
-      {
-        key: "alpha",
-        type: "select",
-        templateOptions: {
-          label: "Alpha",
-          "valueProp": "name",
-          "options": [
-            {
-              "name": "auto"
-            },
-            {
-              "name": "symetric"
-            },
-            {
-              "name": "asymetric"
-            }
-
-          ]
-        }
-      },
-
-      {
-        key: 'iterations',
-        type: 'input',
-        templateOptions: {
-          type: 'number',
-          label: 'Iterations'
+          label: 'Gamma'
 
         }
       },
 
       {
-        key: 'gamma_threshold',
+        key: 'kappa',
         type: 'input',
         templateOptions: {
           type: 'number',
-          label: 'Gamma Threshold'
+          label: 'Kappa'
 
         }
       },
 
        {
-        key: 'minimum_probability',
+        key: 'tau',
         type: 'input',
         templateOptions: {
           type: 'number',
-          label: 'Minimum Probability'
+          label: 'Tau'
         }
       },
+      {
+        key: 'T',
+        type: 'input',
+        templateOptions: {
+          type: 'number',
+          label: 'T'
+        }
+      },
+      {
+        key: 'K',
+        type: 'input',
+        templateOptions: {
+          type: 'number',
+          label: 'K'
+        }
+      },
+
+      {
+        key: 'eta',
+        type: 'input',
+        templateOptions: {
+          type: 'number',
+          label: 'Eta'
+        }
+      },
+      {
+        key: 'scale',
+        type: 'input',
+        templateOptions: {
+          type: 'number',
+          label: 'Scale'
+        }
+      },
+      {
+        key: 'var_converge',
+        type: 'input',
+        templateOptions: {
+          type: 'number',
+          label: 'Var Converge'
+        }
+      },
+
+
       {
         key: "chunking",
         type: "select",
@@ -247,11 +290,16 @@ angular.module('litmetricsfrontendApp')
     //init lemma field value
     $scope.topicModelingData.lemmas = true;
     $scope.topicModelingData.wordNetSense = true;
-    $scope.topicModelingData.alpha = 'auto';
     $scope.topicModelingData.chunking = 'none';
-    $scope.topicModelingData.gamma_threshold = 0.001;
-    $scope.topicModelingData.iterations = 50;
-    $scope.topicModelingData.minimum_probability =0.01;
+    $scope.topicModelingData.kappa = 1.0;
+    $scope.topicModelingData.tau = 64.0;
+    $scope.topicModelingData.alpha = 1;
+    $scope.topicModelingData.gamma = 1;
+    $scope.topicModelingData.eta = 0.01;
+    $scope.topicModelingData.scale = 1.0;
+    $scope.topicModelingData.var_converge = 0.0001
+    $scope.topicModelingData.T = 150
+    $scope.topicModelingData.K = 15
 
 
     /* BUNDLE AND SEND OBJECTS TO BE TOPIC MODELED */
@@ -264,7 +312,7 @@ angular.module('litmetricsfrontendApp')
       }
 
       if (!data.collections.length < 1) {
-        topicModelingService.modelTopics(data).success(function () {
+        topicModelingService.hdpModelTopics(data).success(function (d) {
           usSpinnerService.stop('spinner-1');
           alert('Your topic-modeling is now processing.  You will be sent an email upon completion and will be able to view your results in the modeling results tab.')
 
@@ -277,6 +325,5 @@ angular.module('litmetricsfrontendApp')
         alert('Please include at least on collection in your topic modeling data.');
       }
     }
-
 
   });

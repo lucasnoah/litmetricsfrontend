@@ -24,10 +24,7 @@ angular.module('litmetricsfrontendApp')
 
     }
 
-
     $scope.init()
-
-
     $scope.viewTopic = function(topicGroup){
       $scope.selectedTopicGroup=topicGroup;
       topicModelingService.downloadCsv($scope.selectedTopicGroup.id).success(function(){

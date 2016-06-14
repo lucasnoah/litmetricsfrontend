@@ -33,11 +33,9 @@ angular
 
 
   .constant('API_URL', urlBase)
-  
-  .config(['$compileProvider', function ($compileProvider) {
-    $compileProvider.aHrefSanitizationWhitelist(/^\s*(|blob|):/);
-}])
-  
+
+
+
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
@@ -92,6 +90,16 @@ angular
         controller: 'BibliographyCtrl',
         controllerAs: 'bibliography'
       })
+      .when('/hdp', {
+        templateUrl: 'views/hdp.html',
+        controller: 'HdpCtrl',
+        controllerAs: 'hdp'
+      })
+      .when('/lsi', {
+        templateUrl: 'views/lsi.html',
+        controller: 'LsiCtrl',
+        controllerAs: 'lsi'
+      })
       .otherwise({
         redirectTo: '/'
       });
@@ -117,7 +125,7 @@ angular
   $authProvider.tokenPrefix = 'satellizer';
   $authProvider.authHeader = 'Authorization';
   $authProvider.authToken = 'Token';
-  $authProvider.storageType = 'localStorage';
+  $authProvider.storageType = 'sessionStorage';
     //delete $httpProvider.defaults.headers.common["X-Requested-With"];
     $httpProvider.defaults.headers.common["Accept"] = "application/json";
     $httpProvider.defaults.headers.common["Content-Type"] = "application/json";
