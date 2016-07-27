@@ -62,6 +62,19 @@ angular.module('litmetricsfrontendApp')
       })
       return collectionKey;
     }
+    
+    this.exportCollection = function(collection, filter){
+      
+        var data = {
+          collection: collection,
+          filter: filter
+        }
+      
+      console.log('export data', data)
+      
+       return $http.post(API_URL + 'collections/export/', data)
+      
+    }
 
 
   });

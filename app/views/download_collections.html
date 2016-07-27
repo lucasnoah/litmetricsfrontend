@@ -1,0 +1,68 @@
+<div class="container">
+  <span us-spinner spinner-key="spinner-1"></span>
+  <!--BEGIN TITLE AND EXPLAINER-->
+  <div class="row">
+    <div class="col-sm-12">
+      <h1>Export Collections</h1>
+      <p>Here you are able to download filtered collections filtered collections and export them as space separated text files.  The collections can then be proofed on your own and re imported as locked collections at the import tab.  The download can take some time to process.</p>
+    </div>
+
+  </div>
+  <!--END TITLE AND EXPLAINER-->
+
+    <!--END SELECTION AND ADDITION-->
+  <div class="row">
+    <div class="col-sm-8 top-spacer">
+      <div class="collection-select-box">
+        <label for="collectionSelector">Current Collection</label>
+        <select ng-model="selectedCorpusCollection" class="form-control" id="collectionSelector"
+                ng-options="collection.title for collection in corpusCollections">
+        </select>
+      </div>
+      <div class="corpus-list-box">
+        <h3>collection members</h3>
+        <div ng-repeat="ci in selectedCorpusCollection.items">
+          <p>{{ci.title}} </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!--BEGIN FILTER SELECTION-->
+  <div class="row">
+    <div class="col-sm-8 top-spacer">
+      <label for="filterSelect">Filter</label>
+    <select ng-model="selectedFilter" class="form-control" id="filterSelect"
+              ng-options="f.name for f in filters">
+      </select>
+      </div>
+  </div>
+  <!--END FILTER SELECTION-->
+
+
+  <!--BEGIN DOWNLOAD BUTTON-->
+  <div class="row">
+    <div class="col-sm-8 top-spacer">
+      <button class="btn btn-lg btn-info" ng-click="export()">Export Collection</button>
+    </div>
+
+  </div>
+  <!--END DOWNLOAD BUTTON-->
+
+  <!--BEGIN DOWNLOAD LINK-->
+  <div class="row" ng-hide="fileUrl == undefined">
+    <div class="col-sm-8 top-spacer">
+      <a class="download-link" ng-href="{{ fileUrl }}" download="{{selectedCorpusCollection.title}}.txt">{{selectedCorpusCollection.title + ".txt"}}</a>
+    </div>
+  </div>
+
+
+
+  <!--END DOWNLOAD LINK-->
+
+
+
+  </div>
+</div>
+

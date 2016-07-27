@@ -9,9 +9,9 @@
  * Main module of the application.
  */
 
-//var urlBase = 'http://api.litmetrics.com/'
+var urlBase = 'http://api.litmetrics.com/';
 
-var urlBase = 'http://127.0.0.1:8000/'
+//var urlBase = 'http://127.0.0.1:8000/';
 
 angular
   .module('litmetricsfrontendApp', [
@@ -38,12 +38,12 @@ angular
 
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/', {
+      .when('/import', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         controllerAs: 'main'
       })
-      .when('/about', {
+      .when('/', {
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl',
         controllerAs: 'about'
@@ -99,6 +99,21 @@ angular
         templateUrl: 'views/lsi.html',
         controller: 'LsiCtrl',
         controllerAs: 'lsi'
+      })
+      .when('/download_collections', {
+        templateUrl: 'views/download_collections.html',
+        controller: 'DownloadCollectionsCtrl',
+        controllerAs: 'downloadCollections'
+      })
+      .when('/mallet', {
+        templateUrl: 'views/mallet.html',
+        controller: 'MalletCtrl',
+        controllerAs: 'mallet'
+      })
+      .when('/lsi_results', {
+        templateUrl: 'views/lsi_results.html',
+        controller: 'LsiResultsCtrl',
+        controllerAs: 'lsiResults'
       })
       .otherwise({
         redirectTo: '/'

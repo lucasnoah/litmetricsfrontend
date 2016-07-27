@@ -162,7 +162,7 @@ angular.module('litmetricsfrontendApp')
       $scope.corpusItems = d;
       //set the first option in the ng-options list
       $scope.selectedCorpusItem = $scope.corpusItems[0];
-    })
+    });
 
     //grab the sample tokens
     tokenService.grabTokensForCorpus(1, 400, 0).success(function (d) {
@@ -171,17 +171,17 @@ angular.module('litmetricsfrontendApp')
       $scope.nextTokenPage = d.next;
       $scope.previousTokenPage = d.previous;
       //run the original filter token filtering
-      $scope.filteredTokens = tokenService.filterTokenByUserChoice($scope.exampleTokens, $scope.data).selected
-       $scope.removedTokens = tokenService.filterTokenByUserChoice($scope.exampleTokens, $scope.data).removed
+      $scope.filteredTokens = tokenService.filterTokenByUserChoice($scope.exampleTokens, $scope.data).selected;
+       $scope.removedTokens = tokenService.filterTokenByUserChoice($scope.exampleTokens, $scope.data).removed;
 
-    })
+    });
 
     //grab user filters
     filterService.grabUserFilters().success(function(d){
       $scope.filters = d;
     }).error(function(e){
 
-    })
+    });
 
 
 
@@ -195,7 +195,7 @@ angular.module('litmetricsfrontendApp')
 
 
 
-    }
+    };
 
 
     /*WATCH FOR FORM VALUE CHANGES AND APPLY THEM TO THE FILTER*/

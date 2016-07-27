@@ -1,5 +1,10 @@
-
+<div class="container-fluid">
 <span us-spinner spinner-key="spinner-1"></span>
+<div class="col-sm-12">
+  <h1>Latent Dirichlet Allocation topic modeling</h1>
+  <p><a href="https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation" target="_blank">https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation</a> </p>
+<p>Model topics via <a target="_blank" href="https://radimrehurek.com/gensim/">gensim</a> the Python based open source topic modeling package.  There is extensive documentation on the website.  Gensim offers considerably more controls than mallet and they are all editible below.  The current values are just suggested starting places.</p>
+</div>
 <div class="col-sm-3">
   <!--CORPUS COLLECTION PICKER-->
   <div class="row">
@@ -57,11 +62,8 @@
   <formly-form model="topicModelingData" fields="topicModelingFormFields" form="topicModelingForm">
     <button class="btn btn-lg btn-info" ng-disabled="topicModelingForm.$invalid" ng-click="modelTopics()">Model Topics</button>
   </formly-form>
-
-
-
 </div>
-
 <div class="col-sm-4">
 
+</div>
 </div>

@@ -2,39 +2,39 @@
 
 /**
  * @ngdoc function
- * @name litmetricsfrontendApp.controller:LsiCtrl
+ * @name litmetricsfrontendApp.controller:MalletCtrl
  * @description
- * # LsiCtrl
+ * # MalletCtrl
  * Controller of the litmetricsfrontendApp
  */
 angular.module('litmetricsfrontendApp')
-  .controller('LsiCtrl', function ($scope, filterService, corpusService, $uibModal, topicModelingService, usSpinnerService) {
-     /*INITIALIZE SCOPE VARIABLES*/
+  .controller('MalletCtrl', function ($scope, filterService, corpusService, $uibModal, topicModelingService, usSpinnerService) {
+    /*INITIALIZE SCOPE VARIABLES*/
 
     $scope.init = function () {
       //filters
       filterService.grabUserFilters().success(function (d) {
         $scope.filters = d;
-      })
+      });
 
       //corpus collections
       corpusService.getUserCorpusCollections().success(function (d) {
         $scope.collections = d;
         //init select object
         $scope.selectedCorpusCollection = $scope.collections[0]
-      })
+      });
 
       //object to dump form data
       $scope.topicModelingData = {};
       //form object
       //$scope.topicModelingForm = {};
-    }
+    };
 
     $scope.init();
 
     /*INITIALIZE FORM FIELDS*/
 
-    $scope.collectionsToModel = []
+    $scope.collectionsToModel = [];
 
     /*ADD AND REMOVE COLLECTIONS*/
 
@@ -48,12 +48,12 @@ angular.module('litmetricsfrontendApp')
 
       }
 
-    }
+    };
 
 
     $scope.removeCorpusCollection = function (collection) {
       $scope.collectionsToModel.splice(collection, 1)
-    }
+    };
 
     /*ASSIGN FILTER OPTIONS FOR EACH COLLECTION*/
 
@@ -87,37 +87,6 @@ angular.module('litmetricsfrontendApp')
 
 
     /*TOPIC MODELING OPTIONS*/
-
-    /*
-
-    (Hierarchical Dirlecht Process): requires training corpus, infers number of topics:
-
-Chunksize defaults to 256 {batch size in Wang article: that’s the number of DOCUMENTS used in each
-
-iteration, NOT a chunking at the document level}
-
-kappa defaults to 1.0 = learning rate {exponential decay rate} {default 0.51 based on Online LDA paper}
-
-{little kappa is “How quickly old information is forgotten”
-
-tau defaults to 64 = slow down parameter {downweights earlier iterations}
-
-Kappa {might be Cap “K”} defaults to 15 = second level truncation level [Number of topics]
-
-T defaults to 150 = top level truncation level [truncation is MAX number of topics for a document]
-
-alpha defaults to 1 = second level concentration
-
-gamma defaults to 1 = first level concentration
-
-eta defaults to 0.01 = the topic dirichlet
-
-scale defaults to 1
-
-Var_converge defaults to 0.0001
-
-Switch for optimal ordering of topics
-     */
 
     $scope.topicModelingFormFields = [
       {
@@ -159,23 +128,19 @@ Switch for optimal ordering of topics
         }
       },
       {
-        key: 'search_query',
+        key: 'numTopics',
         type: 'input',
         templateOptions: {
-          type: 'text',
-          label: 'Query Term'
+          type: 'number',
+          label: 'Number of Topics [integer, max 1000]: Represents the actual number of topics the corpus is estimated to contain.  The researcher determines the number of topics and informs the Topic Modeler the number of topics to for the Modeler to locate.  '
 
         }
       },
-
-
-
-
       {
         key: "chunking",
         type: "select",
         templateOptions: {
-          label: "Chunking: chunks documents into smaller pieces.  Done through either the special breakword breakword or by word count",
+          label: "Chunking: [integer, max 10,000]: Can be used to alter the number of documents the Topic Modeler works with. A single large text can be arbitrarily chunked into documents of n-tokens in length, or, the researcher can insert a special character allowing a single large document to be split at logical “topic” break points – chapters, paragraphs, sections, and so forth.",
           "valueProp": "name",
           "options": [
             {
@@ -222,8 +187,11 @@ Switch for optimal ordering of topics
     //init lemma field value
     $scope.topicModelingData.lemmas = true;
     $scope.topicModelingData.wordNetSense = true;
+    $scope.topicModelingData.alpha = 'auto';
     $scope.topicModelingData.chunking = 'none';
-
+    $scope.topicModelingData.gamma_threshold = 0.001;
+    $scope.topicModelingData.iterations = 50;
+    $scope.topicModelingData.minimum_probability =0.01;
 
 
     /* BUNDLE AND SEND OBJECTS TO BE TOPIC MODELED */
@@ -236,7 +204,7 @@ Switch for optimal ordering of topics
       }
 
       if (!data.collections.length < 1) {
-        topicModelingService.lsiModelTopics(data).success(function (d) {
+        topicModelingService.malletModelTopics(data).success(function () {
           usSpinnerService.stop('spinner-1');
           alert('Your topic-modeling is now processing.  You will be sent an email upon completion and will be able to view your results in the modeling results tab.')
 
@@ -249,5 +217,6 @@ Switch for optimal ordering of topics
         alert('Please include at least on collection in your topic modeling data.');
       }
     }
+
 
   });

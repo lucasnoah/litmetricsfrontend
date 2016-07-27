@@ -39,7 +39,7 @@ angular.module('litmetricsfrontendApp')
 
 
     ]
-
+    
     $scope.loginUser = function() {
       $auth.login($scope.loginInfo)
   .then(function(response) {

@@ -1,3 +1,16 @@
+<ul class="nav navbar-nav" ng-show="loggedIn">
+              <li><a href="#/import">Import</a></li>
+              <li><a ng-href="#/download_collections">Export</a></li>
+              <li><a ng-href="#/corpusitemselection">Collections</a></li>
+              <li><a ng-href="#/filters">Filters</a></li>
+              <li><a ng-href="#/topicmodeling">LDA</a></li>
+              <li><a ng-href="#/mallet">Mallet</a></li>
+              <li><a ng-href="#/hdp">HDP</a></li>
+              <li><a ng-href="#/lsi">LSI</a></li>
+              <li><a ng-href="#/lsi_results">LSI Results</a></li>
+              <li><a ng-href="#/topics">Modeling Results</a>
+              <li><a ng-href="#/corpusediting">Corpus Viewer</a></li>
+            </ul>
 <ul class="nav navbar-nav navbar-right">
 <li ng-hide="loggedIn">
   <button class="btn btn-md btn-info" ng-click="signIn()">Login</button>

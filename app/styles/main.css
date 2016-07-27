@@ -132,3 +132,11 @@ margin-bottom: 10px;
 .collection-select-box{
   margin-bottom: 10px;
 }
+
+.top-spacer{
+  margin-top:10px;
+}
+
+.download-link{
+  font-size:24px;
+}

@@ -1,13 +1,12 @@
 
 <h1>Add a Text File</h1>
-<p>Upload a text file here for processing.  Your file will be tokenized and made available to you for topic modeling after it is done processing.  This can take anywhere form five minutes to a day depending on how busy the site is.</p>
+<p>Upload a text file here for processing.  Your file will be tokenized and made available to ou for topic modeling after it is done processing.  This can take anywhere form five minutes to a day depending on how busy the site is. You are also presented with the option to run your text through <a href="http://ucrel.lancs.ac.uk/vard/about/" target="_blank">VARD</a> to normalize non standard spellings in early literature</p>
   <span us-spinner spinner-key="spinner-1"></span>
-<formly-form model="textuploadData" fields="textUploadFields" form="textuploadForm">
-       <input type="file" ngf-select ng-model="textuploadData.file" name="file"
-             accept="text/*" ngf-max-size="15MB" required
-             ngf-model-invalid="errorFiles">
+<formly-form model="textUploadData" fields="textUploadFields" form="textUploadForm">
+       <input type="file" ngf-select ng-model="textUploadData.file" name="file"
+             accept="text/*" ngf-max-size="15MB" required ngf-model-invalid="errorFiles">
         <div  ng-repeat="e in formErrors">
                   <p style="color:red;">{{ e }}</p>
         </div>
-        <button type="submit" class="btn btn-primary form-control" ng-disabled="textuploadForm.$invalid" ng-click="uploadFile(textuploadData.file)">Submit</button>
+        <button type="submit" class="btn btn-primary form-control" ng-disabled="textUploadForm.$invalid" ng-click="uploadFile(textUploadData.file)">Submit</button>
 </formly-form>

@@ -14,12 +14,12 @@ angular.module('litmetricsfrontendApp')
 
     corpusService.getUserCorpusList().success(function(d){
       $scope.corpusItems = d;
-    })
+    });
 
     corpusService.getUserCorpusCollections().success(function(d){
       $scope.corpusCollections = d;
       $scope.selectedCorpusCollection = $scope.corpusCollections[0];
-    })
+    });
 
 
     $scope.corpusCollectionFields = [
@@ -32,8 +32,8 @@ angular.module('litmetricsfrontendApp')
                 placeholder: 'Enter a Title',
                 required: true
             }
-        },
-    ]
+        }
+    ];
 
 
     $scope.createCorpusCollection = function(){
@@ -46,11 +46,11 @@ angular.module('litmetricsfrontendApp')
 
       })
 
-    }
+    };
 
     $scope.addItemsToCollection = function(){
       corpusService.addItemsToCorpusCollection($scope.corpusItemSelections, $scope.selectedCorpusCollection).success(function(d){
-        var collectionKey = corpusService.matchCorpusItemById($scope.corpusCollections, d)
+        var collectionKey = corpusService.matchCorpusItemById($scope.corpusCollections, d);
         $scope.corpusCollections[collectionKey] = d;
         $scope.selectedCorpusCollection = $scope.corpusCollections[collectionKey];
 
@@ -64,7 +64,7 @@ angular.module('litmetricsfrontendApp')
 
       corpusService.removeItemFromCollection(item, collection).success(function(d){
         //update the corpus collection and the selected corpus collection
-        var collectionKey = corpusService.matchCorpusItemById($scope.corpusCollections, d)
+        var collectionKey = corpusService.matchCorpusItemById($scope.corpusCollections, d);
         $scope.corpusCollections[collectionKey] = d;
         $scope.selectedCorpusCollection = $scope.corpusCollections[collectionKey];
       }).error(function(){

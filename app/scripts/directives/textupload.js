@@ -10,7 +10,10 @@ angular.module('litmetricsfrontendApp')
 
   .controller('TextUploadCtrl', function($scope, API_URL, Upload, $timeout, $route,usSpinnerService){
 
-     $scope.textuploadData = {}
+    $scope.textUploadData = {};
+    $scope.textUploadData.vard = false;
+    $scope.textUploadData.fScore = 1;
+    $scope.textUploadData.threshold = 30;
 
      $scope.textUploadFields = [
 
@@ -23,15 +26,54 @@ angular.module('litmetricsfrontendApp')
                 placeholder: 'Enter a title for this text.',
                 required: true
             }
+        },
+
+             {
+        type: "checkbox",
+        key: "vard",
+        templateOptions: {
+          label: "Normalize Spelling With Vard",
+          required:false
+        }
+      },
+       {
+            key: 'fScore',
+            type: 'input',
+            templateOptions: {
+                type: 'number',
+                label: 'f-score',
+                placeholder: 'Integer',
+                required: false
+            }
+        },
+       {
+            key: 'threshold',
+            type: 'input',
+            templateOptions: {
+                type: 'number',
+                label: 'Threshold Integer',
+                placeholder: 'Integer',
+                required: false
+            }
         }
 
-    ]
+
+    ];
 
      $scope.uploadFile = function(file) {
        usSpinnerService.spin('spinner-1');
+       console.log('the file', $scope.textUploadData.file);
     file.upload = Upload.upload({
       url: API_URL + 'texts/',
-      data: {file: $scope.textuploadData.file, title: $scope.textuploadData.title},
+      data: {
+        file: $scope.textUploadData.file,
+        title: $scope.textUploadData.title,
+        collection: false,
+        vard: $scope.textUploadData.vard,
+        fScore: $scope.textUploadData.fScore,
+        threshold: $scope.textUploadData.threshold
+
+      },
     });
 
     file.upload.then(function (response) {
@@ -52,6 +94,8 @@ angular.module('litmetricsfrontendApp')
       console.log(file.progress);
     });
     }
+
+
   })
 
   .directive('textupload', function () {

@@ -1,1 +1,56 @@
-<p>This is the about view.</p>
+<div class="container">
+  <div class="jumbotron">
+    <h1>Litmetrics</h1>
+    <h4>Topic Modeling in an environment designed to permit the
+
+unsupervised and systematic manipulation of Topic Modeling Variables along with a sophisticated array
+
+of Text, Token, and Corpora processing tools.</h4>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>Features</h2>
+      <p><b>Text Importing:</b> Texts with non-standard English can be standardized so that variant spellings can all be systematically corrected to standard modern spellings.</p>
+      <p><b>Text Tagging:</b> Texts are then tagged using the Stanford NLP POS tagger, Named Entity Recognition, and
+Lemmatiser, and provide a Wordnet word-sense disambiguator. Planned future tools include De-Co-
+referencing English pronouns, Sentiment Analysis tools, and Word Origin tagging.</p>
+
+      <p>
+        <b>Corpus Preparation:</b>Corpus Preparation: Once uploaded, texts can be easily grouped into multiple Corpora.
+      </p>
+      <p>
+        <b>Corpus Filtering:</b> The researcher is able to design custom filters for each corpus so that only the tokens
+that meet certain criteria will be included in the prepared token list submitted to the Topic Modeler.
+Parameters for filtering include removing Stop Words of the User’s choosing, removing certain Parts of
+Speech prior to Modeling, truncating words to their Lemmas so that words with different numbers or
+tenses will be standardized, and appending WordNet WordSenses to tokens so that words with different
+WordSenses will be disambiguated and will process as unique Terms.
+      </p>
+      <p>
+        <b>Topic Analysis:</b> A corpus along with its associated filter can then be submitted to one of several Topic
+
+Modelers, and the Topic Modeler variables can either be handled through “standard” presets or can be
+
+set appropriately by the researcher.
+
+The researcher, therefore, can easily experiment with numerous Topic Modeling functions changing
+
+parameters to analyze the effects of the environment on the resulting Topic outputs.
+
+It is simple to compare results from several Topic Modelers over the same corpus with same variable
+
+settings, or the same Modeler with different variable settings.
+      </p>
+
+      <ul>
+        <li>LSA – The Simple LSA modeler allows the researcher to discover the latent semantic environment of individual terms in a specified corpus.</li>
+        <li>MALLET – The standard MALLET LDA (familiar to many researchers) is available.  User chooses number of topics, iterations, tokens per topic, chunk size, optimization threshold, and topic threshold.</li>
+        <li>GENSIM – Gensim LDA implementation is available.  User chooses number of topics, iterations, tokens per topic, chunk size, passes, decay rate, minimum token threshold, and minimum token probability.</li>
+        <li>HDP: The Hierarchical implementation of Gensim LDA, allows the modeler to determine the number of topics in a corpus, and the number of tokens in each topic found, rather than the user pre-determining the number of topics. As with Gensim LDA, user chooses iterations, chunk size, passes, decay rate, minimum token threshold, and minimum token probability.  User also chooses scale, convergence, alpha & gamma concentrations, max number of topics, and max tokens per topic.  User DOES NOT choose number of topics, of course.</li>
+      </ul>
+      <p><b>Corpus Viewer:</b> A very basic corpus editor is provided. It allows the researcher to see page by page the POS tagger results.  As our system becomes more robust, more views of data will be provided in the Corpus Viewer, so that a researcher can easily locate tokens that have particular features.</p>
+      <p><b>Editing Tools:</b> We provide no editing tools.  Texts and Corpora can be labeled and exported/imported on our site.  An export into a word processor while simultaneously manipulating switches in the Corpus Viewer should make it possible for most users to fine-tune the exported text and prepare it to be re-imported to the site for idealized Topic Modeling.
+</p>
+    </div>
+  </div>
+</div>

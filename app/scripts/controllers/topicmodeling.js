@@ -133,7 +133,16 @@ angular.module('litmetricsfrontendApp')
         type: 'input',
         templateOptions: {
           type: 'number',
-          label: 'Number of topics'
+          label: 'Number of Topics [integer, max 1000]: Represents the actual number of topics the corpus is estimated to contain.  The researcher determines the number of topics and informs the Topic Modeler the number of topics to for the Modeler to locate.',
+
+        }
+      },
+      {
+        key: 'top_n',
+        type: 'input',
+        templateOptions: {
+          type: 'number',
+          label: 'Tokens per Topic [integer, max 100]: Choose the number of distinct tokens to be output for each topic.  '
 
         }
       },
@@ -142,7 +151,7 @@ angular.module('litmetricsfrontendApp')
         type: 'input',
         templateOptions: {
           type: 'number',
-          label: 'Number of passes'
+          label: 'Passes [integer, max 50]: User chooses the number of complete passes through the entire corpus the Modeler should make.  This is a feature unique to Gensim.'
 
         }
       },
@@ -173,7 +182,7 @@ angular.module('litmetricsfrontendApp')
         type: 'input',
         templateOptions: {
           type: 'number',
-          label: 'Iterations'
+          label: "Iterations [integer, max 100]: The number of times the Topic Modeler will go through each document in the corpus. With a corpus of only a few documents, some have argued that a smaller number of iterations is appropriate.  Very large numbers of iterations, >100, are said to either provide no appreciable improvement in topic quality, or, to actually have a negative effect on topic quality.  This is a loop through the “E Step” in the algorithm."
 
         }
       },
@@ -183,7 +192,7 @@ angular.module('litmetricsfrontendApp')
         type: 'input',
         templateOptions: {
           type: 'number',
-          label: 'Gamma Threshold'
+          label: 'Threshold [decimal, max 1]: Determines how frequently the token must appear in the corpus in order to be considered assignable to any topic. The decimal is a ratio of token’s occurrences divided by the number of tokens in the corpus.'
 
         }
       },
@@ -193,14 +202,14 @@ angular.module('litmetricsfrontendApp')
         type: 'input',
         templateOptions: {
           type: 'number',
-          label: 'Minimum Probability'
+          label: 'Probability [decimal, max 1]: Determines how weak/strong the probability must be for a given Token to be assigned to a Topic.'
         }
       },
       {
         key: "chunking",
         type: "select",
         templateOptions: {
-          label: "Chunking: chunks documents into smaller pieces.  Done through either the special breakword breakword or by word count",
+          label: "Chunking: Can be used to alter the number of documents the Topic Modeler works with. A single large text can be arbitrarily chunked into documents of n-tokens in length, or, the researcher can insert a special character allowing a single large document to be split at logical topic break points – chapters, paragraphs, sections, and so forth.",
           "valueProp": "name",
           "options": [
             {
@@ -221,7 +230,7 @@ angular.module('litmetricsfrontendApp')
         type: 'input',
         templateOptions: {
           type: 'number',
-          label: 'Chunk Size: The word count size that you want to split each document  into before it hits the topic modeling processing.  This can radically effect the outcome of your topic models'
+          label: 'Chunk Size [integer, max 10,000]: '
 
         },
         hideExpression: function(){
@@ -252,6 +261,8 @@ angular.module('litmetricsfrontendApp')
     $scope.topicModelingData.gamma_threshold = 0.001;
     $scope.topicModelingData.iterations = 50;
     $scope.topicModelingData.minimum_probability =0.01;
+    $scope.topicModelingData.top_n = 10;
+    $scope.topicModelingData.numPasses = 2;
 
 
     /* BUNDLE AND SEND OBJECTS TO BE TOPIC MODELED */

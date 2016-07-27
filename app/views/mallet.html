@@ -1,11 +1,13 @@
+<div class="container">
+
 
 <span us-spinner spinner-key="spinner-1"></span>
 <div class="col-sm-12">
-  <h1>Latent Semantic Analysis term search</h1>
-  <p><a href="https://en.wikipedia.org/wiki/Latent_semantic_analysis" target="_blank">https://en.wikipedia.org/wiki/Latent_semantic_analysis</a> </p>
-  <p>query a term within the context of a corpus collection to find similar terms.  This is a corpus configurable version of ever classic <a target="_blank" href="http://lsa.colorado.edu/">lsa.colorado.edu</a>.</p>
+  <h1>Mallet LDA Topic Modeling</h1>
+  <p>LDA modeling via Mallet.<a href="http://mallet.cs.umass.edu/" target="_blank">http://mallet.cs.umass.edu/</a> </p>
+  <p>The standard MALLET LDA (familiar to many researchers) is available.  User chooses number of topics, iterations, tokens per topic, chunk size, optimization threshold, and topic threshold.</p>
 </div>
-<div class="col-sm-3">
+<div class="col-sm-6">
   <!--CORPUS COLLECTION PICKER-->
   <div class="row">
     <h3>Add collections to the topic modeling data set</h3>
@@ -18,9 +20,8 @@
   </div>
   <!--CORPUS COLLECTIONS ADDED LIST-->
   <div class="row">
-    <h3>Collections To Search</h3>
+    <h3>Collections To Model</h3>
     <div class="collection-box">
-
       <table class="table table-hover">
        <thead>
        <th>Title</th>
@@ -57,16 +58,14 @@
 </div>
 </div>
 
-<div class="col-sm-4">
+<div class="col-sm-6">
   <h2>Modeling Options</h2>
   <formly-form model="topicModelingData" fields="topicModelingFormFields" form="topicModelingForm">
-    <button class="btn btn-lg btn-info" ng-disabled="topicModelingForm.$invalid" ng-click="modelTopics()">Submit Query</button>
+    <button class="btn btn-lg btn-info" ng-disabled="topicModelingForm.$invalid" ng-click="modelTopics()">Model Topics</button>
   </formly-form>
-
-
-
 </div>
 
 <div class="col-sm-4">
 
+</div>
 </div>

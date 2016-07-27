@@ -23,12 +23,20 @@ angular.module('litmetricsfrontendApp')
     
     this.lsiModelTopics = function (modelingData) {
       return $http.post(API_URL + 'models/lsi_model_topics/', modelingData);
+    }
+    
+    this.malletModelTopics = function (modelingData) {
+      return $http.post(API_URL + 'models/mallet_model_topics/', modelingData);
     };
 
     this.getYourTopics = function(){
       return $http.get(API_URL +'models/');
     };
-
+    
+    this.getLsiResults = function(){
+      return $http.get(API_URL + 'models/lsi_results/')
+    };
+    
     this.downloadCsv = function(topicId){
       var data = {
         topic_id: topicId

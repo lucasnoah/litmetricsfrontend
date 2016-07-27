@@ -1,0 +1,15 @@
+
+<h1>
+  Import a Corpus Collection
+</h1>
+<p>Import a pre filtered and preprocessed corpus collection as .txt file consisting of space separated words. Create a corpus collection</p>
+  <span us-spinner spinner-key="spinner-1"></span>
+<formly-form model="collectionUploadData" fields="collectionUploadFields" form="collectionUploadForm">
+       <input type="file" ngf-select ng-model="collectionUploadData.file" name="lfile"
+             accept="text/*" ngf-max-size="15MB" required
+             ngf-model-invalid="errorFiles">
+        <div  ng-repeat="e in formErrors">
+                  <p style="color:red;">{{ e }}</p>
+        </div>
+        <button type="submit" class="btn btn-primary form-control" ng-disabled="collectionUploadForm.$invalid" ng-click="uploadFile(collectionUploadData.file)">Submit</button>
+</formly-form>

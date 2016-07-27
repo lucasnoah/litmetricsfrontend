@@ -1,0 +1,26 @@
+
+<!--RESULTS LISTING-->
+<div class="col-sm-3">
+  <h2>Click on a topic to view results</h2>
+  <div ng-repeat="result in results" >
+    <div class="topic-box" ng-click="viewResult(result)" ng-class="{selected: result === selectedResultGroup}">
+    <p>Creat On: {{ result.created | date}}</p>
+    <p>Collections: <span ng-repeat="col in result.collections">{{col.title}} </span></p>
+    <p>Query Term: {{result.query_term}}</p>
+    </div>
+  </div>
+</div>
+<!--END RESULTS LISTING-->
+
+<!--RESULTS CONTENT-->
+<div class="col-sm-9">
+  <h2>Topic Modeling Results</h2>
+  <a ng-href="{{ fileUrl }}" download="{{selectedResultGroup.id.toString()}}.csv">Download Topics as CSV</a>
+
+  <h3>Results</h3>
+  <div class="col-xs-12" ng-repeat="result in selectedResultGroup.results">
+    <span>{{result}}</span>
+  </div>
+
+</div>
+<!--END RESULTS CONTENT-->
