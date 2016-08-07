@@ -62,18 +62,31 @@ angular.module('litmetricsfrontendApp')
       })
       return collectionKey;
     }
-    
+
     this.exportCollection = function(collection, filter){
-      
+
         var data = {
           collection: collection,
           filter: filter
         }
-      
+
       console.log('export data', data)
-      
+
        return $http.post(API_URL + 'collections/export/', data)
-      
+
+    }
+
+    this.getTokenSum = function(collection){
+      /*
+      Get the total summed token count for a courpus collection
+       */
+      var count = 0;
+      angular.forEach(collection.items, function(key, val){
+        console.log('buthole',key, val);
+        count = count + key.token_count;
+      }
+      );
+      return count
     }
 
 

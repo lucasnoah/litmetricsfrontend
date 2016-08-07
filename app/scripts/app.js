@@ -9,9 +9,8 @@
  * Main module of the application.
  */
 
-var urlBase = 'http://api.litmetrics.com/';
-
-//var urlBase = 'http://127.0.0.1:8000/';
+//var urlBase = 'http://api.litmetrics.com/';
+var urlBase = 'http://127.0.0.1:8000/';
 
 angular
   .module('litmetricsfrontendApp', [

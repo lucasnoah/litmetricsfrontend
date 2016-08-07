@@ -10,6 +10,8 @@
 angular.module('litmetricsfrontendApp')
   .controller('DownloadCollectionsCtrl', function ($scope, corpusService, filterService, usSpinnerService, $window) {
 
+    $scope.getTokenSum = corpusService.getTokenSum;
+
     function init() {
       corpusService.getUserCorpusCollections().success(function (d) {
         $scope.corpusCollections = d;

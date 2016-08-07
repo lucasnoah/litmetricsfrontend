@@ -11,6 +11,7 @@ angular.module('litmetricsfrontendApp')
   .controller('CorpusitemselctionCtrl', function ($scope, corpusService) {
 
     $scope.corpusAdditionData = {};
+    $scope.getTokenCount = corpusService.getTokenSum;
 
     corpusService.getUserCorpusList().success(function(d){
       $scope.corpusItems = d;
@@ -19,6 +20,7 @@ angular.module('litmetricsfrontendApp')
     corpusService.getUserCorpusCollections().success(function(d){
       $scope.corpusCollections = d;
       $scope.selectedCorpusCollection = $scope.corpusCollections[0];
+      corpusService.getTokenSum($scope.selectedCorpusCollection);
     });
 
 
@@ -49,6 +51,7 @@ angular.module('litmetricsfrontendApp')
     };
 
     $scope.addItemsToCollection = function(){
+      console.log('corpus item selections', $scope.corpusItemSelections)
       corpusService.addItemsToCorpusCollection($scope.corpusItemSelections, $scope.selectedCorpusCollection).success(function(d){
         var collectionKey = corpusService.matchCorpusItemById($scope.corpusCollections, d);
         $scope.corpusCollections[collectionKey] = d;
@@ -73,5 +76,11 @@ angular.module('litmetricsfrontendApp')
       })
 
     };
+
+
+
+    $scope.$watch('corpusItemSelections', function(aval, bval){
+      console.log('item selection change', aval, bval);
+    })
 
   });

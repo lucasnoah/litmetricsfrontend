@@ -49,9 +49,9 @@
         </select>
       </div>
       <div class="corpus-list-box">
-        <h3>collection members</h3>
+        <h3>collection members: {{getTokenCount(selectedCorpusCollection)}} Tokens</h3>
         <div ng-repeat="ci in selectedCorpusCollection.items">
-          <p>{{ci.title}} <span class="glyphicon glyphicon-remove-circle"
+          <p>{{ci.title}} : {{ci.token_count}} tokens <span class="glyphicon glyphicon-remove-circle"
                                 ng-click="removeItemFromCollection(ci, selectedCorpusCollection)"></span></p>
         </div>
       </div>

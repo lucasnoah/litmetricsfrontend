@@ -173,7 +173,7 @@ Switch for optimal ordering of topics
         type: 'input',
         templateOptions: {
           type: 'number',
-          label: 'Gamma'
+          label: 'gamma [integer, default 1 max 5]: the threshold occurrence for a term to be assigned to a topic T. “1” is the most likely appropriate value.'
 
         }
       },
@@ -183,8 +183,7 @@ Switch for optimal ordering of topics
         type: 'input',
         templateOptions: {
           type: 'number',
-          label: 'Kappa'
-
+          label: 'kappa [default .51, the decay rate, a decimal from 0-5]: Decay, as described above under Gensim.'
         }
       },
 
@@ -193,7 +192,7 @@ Switch for optimal ordering of topics
         type: 'input',
         templateOptions: {
           type: 'number',
-          label: 'Tau'
+          label: 'tau [default 64, max 500]: The parameter that will down-weight results from earlier iterations, this is similar to the “Update Every” parameter under Gensim above.'
         }
       },
       {
@@ -201,7 +200,7 @@ Switch for optimal ordering of topics
         type: 'input',
         templateOptions: {
           type: 'number',
-          label: 'T'
+          label: 'T [default 150, max 500]: The Top Level truncation, i.e., the LARGEST possible number of Topics in the corpus. User will not necessarily receive this many as results.'
         }
       },
       {
@@ -209,7 +208,7 @@ Switch for optimal ordering of topics
         type: 'input',
         templateOptions: {
           type: 'number',
-          label: 'K'
+          label: 'Kappa [decimal, 15, Max 100]: Largest number of “topics” [i.e. tokens] possible per document / chunk, the second, lower level of the hierarchy.'
         }
       },
 
@@ -218,7 +217,7 @@ Switch for optimal ordering of topics
         type: 'input',
         templateOptions: {
           type: 'number',
-          label: 'Eta'
+          label: 'eta [minimum probability]: Same as Gensim above for Minimum Probability.'
         }
       },
       {
@@ -226,7 +225,7 @@ Switch for optimal ordering of topics
         type: 'input',
         templateOptions: {
           type: 'number',
-          label: 'Scale'
+          label: 'Scale [integer, default 1]: {I cannot find anything in documentation or literature that describes what “scale” refers to. Perhaps this should be a coded default and not be set by user}.'
         }
       },
       {
@@ -234,7 +233,7 @@ Switch for optimal ordering of topics
         type: 'input',
         templateOptions: {
           type: 'number',
-          label: 'Var Converge'
+          label: 'Var Converge [decimal, default .0001, max 1]: The minimum frequency of a token to be assigned to a topic, similar to Gensim above “gamma threshold”.'
         }
       },
 
