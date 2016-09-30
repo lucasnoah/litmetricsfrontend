@@ -110,27 +110,9 @@ angular.module('litmetricsfrontendApp')
         }
       },
       {
-        key: 'lemmas',
-        type: 'radio',
-        templateOptions: {
-
-          label: 'use lemmas in place of words?',
-          options: [{
-            value: true,
-            name: 'YES',
-          },
-            {
-              value: false,
-              name: 'NO'
-            }
-
-          ]
-
-        }
-      },
-      {
         key: 'numTopics',
         type: 'input',
+        defaultValue: 40,
         templateOptions: {
           type: 'number',
           label: 'Number of Topics [integer, max 1000]: Represents the actual number of topics the corpus is estimated to contain.  The researcher determines the number of topics and informs the Topic Modeler the number of topics to for the Modeler to locate.',
@@ -176,6 +158,31 @@ angular.module('litmetricsfrontendApp')
           ]
         }
       },
+
+      {
+        key: 'decay',
+        type: 'input',
+        defualtVAlue: 0.5,
+        templateOptions: {
+          type: 'number',
+          label: "Decay Rate [decimal, max 1]: As the Modeler through an iteration, the rate at which earlier word-vector calculations are ‘forgotten’ by the Modeler and the most recent iterations are therefore favorably weighted."
+
+        }
+      },
+
+
+       {
+        key: 'update_every',
+        type: 'input',
+        defaultValue: 10,
+        templateOptions: {
+          type: 'number',
+          label: "Update Every: [integer, default 10] After how many iterations should the Topic Modeler be rebalanced according to the calculations it has already made.  “10” has occasionally been cited as a reasonable number of iterations prior to rebalancing. "
+
+        }
+      },
+
+
 
       {
         key: 'iterations',

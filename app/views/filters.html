@@ -1,105 +1,83 @@
-
 <div class="container-fluid">
-<!--BEGIN FILTER CONSTRUCTION SECTION-->
-<div class="col-sm-6">
+  <span us-spinner spinner-key="spinner-1"></span>
+  <!--BEGIN FILTER CONSTRUCTION SECTION-->
+  <div class="col-sm-6">
 
-
-<!--BEGIN FILTER LIST SECTION-->
-  <div class="row">
-    <div class="col-sm-10">
-  <h1>Create a new filter</h1>
-  <p>Please enter a new filter title, select your options below and then click add filter</p>
-  <p>Filter editing is not yet available, please create new ones to suit your needs.</p>
-  <div class="row">
-
-    <formly-form model="newData" fields="newFilterFormFields">
-        <button type="submit" class="btn btn-primary"  ng-click="addFilter()">Add Filter</button>
-    </formly-form>
-
-  </div>
-
-
-  <div class="row">
-    <div class="other-list-box" style="margin-top: 10px;">
-      <h4>Your Filters</h4>
-    <div ng-repeat="f in filters">
-      <div ng-click="editFilter(f)"><p>- {{f.name}}</p></div>
+    <!--BEGIN FILTER LIST SECTION-->
+    <div class="row">
+      <div class="col-sm-10">
+        <h1>Filters</h1>
+        <p>Create or select a filter and modify the options. The changes will be reflected in real time in the preview
+          section.</p>
+        <div class="row">
+          <select ng-model="selectedFilter" class="form-control"
+                  ng-options="f.name for f in filters">
+          </select>
+          <button type="submit" class="btn btn-primary" ng-click="openNewFilterModal()">Add Filter</button>
+          <button type="submit" class="btn btn-primary" ng-click="saveFilter()">Save Filter</button>
+          <button type="submit" class="btn btn-primary" ng-click="deleteFilter()">Delete Filter</button>
+        </div>
+      </div>
     </div>
+
+    <!--END FILTER LIST SECTION-->
+
+    <div class="col-sm-11">
+      <div class="row">
+        <h2>Remove Named Entities?</h2>
+        <formly-form model="data" fields="nerFormFields">
+        </formly-form>
+
+      </div>
+      <div class="row">
+        <h2>Replace words with their lemmas?</h2>
+        <formly-form model="data" fields="lemmaFormFields">
+        </formly-form>
+      </div>
+
+      <div class="row">
+        <h2>Remove these stopwords?</h2>
+        <p>Takes a space seperated list of stopwords. This list is prepopulated with a standard list of english
+          stopwords</p>
+        <formly-form model="data" fields="stopwordsFormFields">
+        </formly-form>
+      </div>
+
+      <div class="row">
+        <h2>Select POS tags to include.</h2>
+        <formly-form model="data" fields="posFormFields">
+        </formly-form>
+      </div>
+
     </div>
   </div>
-</div>
-    </div>
-<!--END FILTER LIST SECTION-->
+  <!--END FILTER CONSTRUCTION SECTION-->
 
 
-<h1>Construction Section</h1>
+  <!--BEGIN FILTER PREVIEW SECTION-->
 
-
-<div class="col-sm-11">
-  <div class="row">
-    <h2>Remove Named Entities?</h2>
-    <formly-form model="data" fields="nerFormFields">
-    </formly-form>
-
-
-  </div>
-   <div class="row">
-    <h2>Replace words with their lemmas?</h2>
-    <formly-form model="data" fields="lemmaFormFields" >
-    </formly-form>
-
-
-  </div>
-
-  <div class="row">
-    <h2>Remove these stopwords?</h2>
-    <p>Takes a space seperated list of stopwords.  This list is prepopulated with a standard list of english stopwords</p>
-    <formly-form model="data" fields="stopwordsFormFields">
-    </formly-form>
-  </div>
-
-
-
-  <div class="row">
-    <h2>Select POS tags to include.</h2>
-    <formly-form model="data" fields="posFormFields">
-    </formly-form>
-  </div>
-
-</div>
-  </div>
-<!--END FILTER CONSTRUCTION SECTION-->
-
-
-
-<!--BEGIN FILTER PREVIEW SECTION-->
-
-<div class="col-sm-6">
-  <h1>Preview Section</h1>
-  <div class="row">
-
-   <p>select a corpus item to view your filter on. The output from your corpus sample will be changed in real time.  This represents the bag of words that you will end up sending to be topic modeled.</p>
-    <select ng-model="selectedCorpusItem" class="form-control"
+  <div class="col-sm-6">
+    <div class="row">
+      <label for="previewSelect">Preview Corpus</label>
+      <select ng-model="selectedCorpusItem" class="form-control" id="previewSelect"
               ng-options="c.title for c in corpusItems | filter:{is_processing:false}">
       </select>
+    </div>
+
+    <div class="row">
+      <!--text preview box-->
+      <h3>Tokens Remaining After Filter</h3>
+      <div class="col-sm-11 corpus-list-box"><span ng-repeat="token in filteredTokens | orderBy: 'id'"><span
+        ng-hide="data.lemma">{{token.original_text}}</span><span ng-show="data.lemma">{{token.lemma}}</span> </span>
+      </div>
+    </div>
+    <div class="row">
+      <!--text preview box-->
+      <h3>Tokens Filtered out</h3>
+      <div class="col-sm-11 other-list-box"><span ng-repeat="token in removedTokens | orderBy: 'id'"><span
+        ng-hide="data.lemma">{{token.original_text}}</span><span ng-show="data.lemma">{{token.lemma}}</span> </span>
+      </div>
+    </div>
   </div>
-
-
-  <div class="row">
-    <!--text preview box-->
-    <h3>Tokens Remaining After Filter</h3>
-    <div class="col-sm-11 corpus-list-box"><span ng-repeat="token in filteredTokens | orderBy: 'id'"><span ng-hide="data.lemma">{{token.original_text}}</span><span ng-show="data.lemma">{{token.lemma}}</span> </span></div>
-  </div>
-  <div class="row">
-    <!--text preview box-->
-    <h3>Tokens Filtered out</h3>
-    <div class="col-sm-11 other-list-box"><span ng-repeat="token in removedTokens | orderBy: 'id'"><span ng-hide="data.lemma">{{token.original_text}}</span><span ng-show="data.lemma">{{token.lemma}}</span> </span></div>
-
-  </div>
-
-</div>
-
-
-<!--END FILTER PREVIEW SECTION-->
-
+  <!--END FILTER PREVIEW SECTION-->
 </div>

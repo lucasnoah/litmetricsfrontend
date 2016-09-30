@@ -9,8 +9,8 @@
  * Main module of the application.
  */
 
-//var urlBase = 'http://api.litmetrics.com/';
-var urlBase = 'http://127.0.0.1:8000/';
+var urlBase = 'http://api.litmetrics.com/';
+//var urlBase = 'http://127.0.0.1:8000/';
 
 angular
   .module('litmetricsfrontendApp', [
@@ -32,8 +32,6 @@ angular
 
 
   .constant('API_URL', urlBase)
-
-
 
   .config(function ($routeProvider) {
     $routeProvider
@@ -114,6 +112,7 @@ angular
         controller: 'LsiResultsCtrl',
         controllerAs: 'lsiResults'
       })
+      
       .otherwise({
         redirectTo: '/'
       });
@@ -128,7 +127,7 @@ angular
   $httpProvider.defaults.useXDomain = false;
 
   $httpProvider.defaults.withCredentials = false;
-    $authProvider.httpInterceptor = function() { return true; },
+  $authProvider.httpInterceptor = function() { return true; },
   $authProvider.withCredentials = false;
   $authProvider.tokenRoot = null;
   $authProvider.baseUrl = urlBase;

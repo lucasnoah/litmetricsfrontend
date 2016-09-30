@@ -137,6 +137,15 @@ angular.module('litmetricsfrontendApp')
         }
       },
       {
+        key: 'top_n',
+        type: 'input',
+        templateOptions: {
+          type: 'number',
+          label: 'number of words per topic to show in results.'
+
+        }
+      },
+      {
         key: "chunking",
         type: "select",
         templateOptions: {

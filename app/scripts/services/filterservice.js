@@ -24,4 +24,18 @@ angular.module('litmetricsfrontendApp')
       return $http.post(API_URL + 'filters/', data)
     }
 
+    this.updateFilter = function(filter_data, filter){
+      var data = {
+        id: filter.id,
+        filter_data: filter_data
+      }
+      return $http.post(API_URL + 'filters/save_filter/', data)
+    }
+
+    this.deleteFilter = function(filter){
+      return $http.delete(API_URL + 'filters/' + filter.id.toString() + '/')
+    }
+
+    
+
   });

@@ -82,7 +82,6 @@ angular.module('litmetricsfrontendApp')
        */
       var count = 0;
       angular.forEach(collection.items, function(key, val){
-        console.log('buthole',key, val);
         count = count + key.token_count;
       }
       );
