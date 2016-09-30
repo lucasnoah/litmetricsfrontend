@@ -88,5 +88,9 @@ angular.module('litmetricsfrontendApp')
       return count
     }
 
+    this.deleteCorpusItem = function(item){
+      return $http.delete(API_URL + 'corpusitems/' + item.id.toString() + '/')
+    }
+
 
   });

@@ -1,13 +1,15 @@
 <div class="corpus-list-box">
   <div ng-if="showProcessing">
     <div ng-repeat="i in processing">
-    <p>{{ i.title }} <span class="glyphicon glyphicon-hourglass" ng-show="i.is_processing"></span></p>
+    <p>{{ i.title }} <span class="glyphicon glyphicon-hourglass" ng-show="i.is_processing">
+      <span class="glyphicon glyphicon-remove-circle" ng-click="deleteCorpusItemModal(i)"></span>
+    </span></p>
   </div>
   </div>
 
   <div ng-if="!showProcessing">
     <div ng-repeat="i in doneProcessing">
-    <p>{{ i.title }} <span class="glyphicon glyphicon-hourglass" ng-show="i.is_processing"></span> : {{i.token_count}} Tokens </p>
+    <p>{{ i.title }} <span class="glyphicon glyphicon-hourglass" ng-show="i.is_processing"></span> : {{i.token_count}} Tokens <span class="glyphicon glyphicon-remove-circle" ng-click="deleteCorpusItemModal(i)"></span></p>
   </div>
   </div>
 
